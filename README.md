@@ -16,7 +16,7 @@ This [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/gui_tutorials/
 - Adding a Cube using Isaac Sim API
 
 # Omnigraph
-OmniGraph is Omniverse’s visual programming framework. Inside Omniverse Isaac Sim, OmniGraph is the main engine for the Replicators, ROS and ROS2 bridges, sensor access, controllers, external input/output devices, UI, and much more.
+OmniGraph is Omniverse’s visual programming framework. In simple words OmniGraph is the visual scripting language of Omniverse. Inside Omniverse Isaac Sim, OmniGraph is the main engine for the Replicators, ROS and ROS2 bridges, sensor access, controllers, external input/output devices, UI, and much more.
 
 
 
