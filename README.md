@@ -26,3 +26,22 @@ Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/gui_tut
 
 
 
+# Create a bridge between ROS2 and ISAAC sim
+First clone turtlebot3 repository in your workspace 
+```
+git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+```
+
+Built this package only for the tutorial 
+```
+cd humble_ws && colcon built --package-select  turtlebot3_description
+```
+Dont forget to source it
+```
+source install/setup.bash
+```
+Go back to isaac sim and import simpl_room environment in a new stage.
+Note. Only open isaac sim after building humble_ws otherwise the topic wont appear.
+
+
+
