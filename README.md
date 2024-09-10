@@ -44,4 +44,9 @@ Go back to isaac sim and import simpl_room environment in a new stage.
 Note. Only open isaac sim after building humble_ws otherwise the topic wont appear.
 
 
+Ensure ros2_bridge extension is enabled. It can be enabled from the Extension Manager by searching for ```omni.isaac.ros2_bridge```. Note ROS and ROS2 bridges cannot be enabled simultaneously. To enable one, make sure the other is disabled first.
+
+
+
+
 
