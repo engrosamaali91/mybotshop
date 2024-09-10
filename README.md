@@ -34,17 +34,46 @@ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
 
 Built this package only for the tutorial 
 ```
-cd humble_ws && colcon built --package-select  turtlebot3_description
+cd humble_ws && colcon built --packages-select  turtlebot3_description
 ```
 Dont forget to source it
 ```
 source install/setup.bash
 ```
-Go back to isaac sim and import simpl_room environment in a new stage.
+Go back to isaac sim and import simple_room environment  and turtlebot3 in a new stage.
 Note. Only open isaac sim after building humble_ws otherwise the topic wont appear.
 
 
 Ensure ros2_bridge extension is enabled. It can be enabled from the Extension Manager by searching for ```omni.isaac.ros2_bridge```. Note ROS and ROS2 bridges cannot be enabled simultaneously. To enable one, make sure the other is disabled first.
+
+Play the scene and the topics will be displayed in a terminal. 
+check if the topic ```cmd_vel``` is ready to subscribe angular and linear velocities.
+
+```
+ros2 topic list
+```
+Now that a differential base topic is setup, a twist message can be published to /cmd_vel topic to control the robot. Let’s drive it forward with the command:
+```
+ros2 topic pub /cmd_vel geometry_msgs/Twist "{'linear': {'x': 0.2, 'y': 0.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}"
+```
+To stop the robot from moving, publish a zero velocity command:
+```
+ros2 topic pub /cmd_vel geometry_msgs/Twist "{'linear': {'x': 0.0, 'y': 0.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}"
+```
+To make it easier for us to move the Turtlebot around, install the teleop_twist_keyboard by running the following command:
+```
+sudo apt-get install ros-$ROS_DISTRO-teleop-twist-keyboard
+```
+Enable driving using the keyboard by running:
+```
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_drive_turtlebot.html#getting-started:~:text=ROS2%20Twist%20message-,Getting%20Started,%EF%83%81,-Important) to understand these ros2 bridge with isac sim concepts
+
+- Drive the robot using the Differential Controller and the Articulation Controller
+- Introduction to ROS2 Bridge omnigraph nodes
+- Subscribing to a ROS2 Twist message
 
 
 
