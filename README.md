@@ -17,7 +17,12 @@ This [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/gui_tutorials/
 
 # Omnigraph
 OmniGraph is Omniverse’s visual programming framework. In simple words OmniGraph is the visual scripting language of Omniverse. Inside Omniverse Isaac Sim, OmniGraph is the main engine for the Replicators, ROS and ROS2 bridges, sensor access, controllers, external input/output devices, UI, and much more.
+There are two graph editors, the Action Graph and the Generic Graph. They can both be found under ‘Window > Visual Scripting’. For majority of cases in Isaac Sim,
+we will be using Action graphs
 
+Let’s build an action graph to control a robot in Isaac Sim the Jetbot.
+
+Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/gui_tutorials/tutorial_gui_omnigraph.html#isaac-sim-app-tutorial-gui-omnigraph:~:text=22%20/%2000%3A32-,Try%20It%20Out,-%EF%83%81)to import NVIDIA robot 'jetbot' in the scene and create action graph for the differential drive robot 
 
 
 
