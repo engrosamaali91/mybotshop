@@ -84,6 +84,7 @@ If you are strictly following the tutorials of isaac sim please do not forget to
 I applied it on custom robot and i am able to control it using keyboard just like turtlebot.
 
 ## ROS2 Cameras
+[attach a camera and visualize it in rviz](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_camera.html#:~:text=ROS2%20Cameras-,ROS2%20Cameras,-%EF%83%81)
 
 
 
