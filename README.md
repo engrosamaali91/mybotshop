@@ -89,5 +89,6 @@ Understand how to publish camera and perception data in ROS2.
 
 Please note we can always use ros2 plugins from isaac utils/common_omni_graphs -> ROS2 Camera, for depth image i was not able to visulize depth image because the camera in isac sim was placed too far away. If needed please adjust the camera position so that tht depth is rendered appropriately.
 
+Also understand how to label objects in isaac sim using replicator but this is an optional [replicator](https://docs.omniverse.nvidia.com/isaacsim/latest/replicator_tutorials/tutorial_replicator_getting_started.html#isaac-sim-app-tutorial-replicator-getting-started:~:text=Overview%20and%20Getting%20Started-,Overview%20and%20Getting%20Started,%EF%83%81,-Isaac%20Sim%20Replicator%20is)
 
 
