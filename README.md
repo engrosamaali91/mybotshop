@@ -76,6 +76,10 @@ Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tu
 - Introduction to ROS2 Bridge omnigraph nodes
 - Subscribing to a ROS2 Twist message
 
+
+If you are strictly following the tutorials of isaac sim please do not forget to apply the differential controller on your two wheeled custom robot.
+I applied it on custom robot and i am able to control it using keyboard just like turtlebot.
+
 ## ROS2 Cameras
 
 
