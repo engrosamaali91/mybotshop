@@ -87,5 +87,7 @@ I applied it on custom robot and i am able to control it using keyboard just lik
 Understand how to publish camera and perception data in ROS2.
 [attach a camera and visualize it in rviz](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_camera.html#:~:text=ROS2%20Cameras-,ROS2%20Cameras,-%EF%83%81)
 
+Please note we can always use ros2 plugins from isaac utils/common_omni_graphs -> ROS2 Camera
+
 
 
