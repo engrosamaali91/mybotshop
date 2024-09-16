@@ -91,4 +91,4 @@ Please note we can always use ros2 plugins from isaac utils/common_omni_graphs -
 
 Also understand how to label objects in isaac sim using replicator but this is an optional [replicator](https://docs.omniverse.nvidia.com/isaacsim/latest/replicator_tutorials/tutorial_replicator_getting_started.html#isaac-sim-app-tutorial-replicator-getting-started:~:text=Overview%20and%20Getting%20Started-,Overview%20and%20Getting%20Started,%EF%83%81,-Isaac%20Sim%20Replicator%20is)
 
-
+To understand how to publish using python scripts please follow this tutorial(must) [publish using python script](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_camera.html#isaac-sim-app-tutorial-ros2-camera:~:text=image%20is%20limited.-,Additional%20Publishing%20Options,%EF%83%81,-To%20publish%20images)
