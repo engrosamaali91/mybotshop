@@ -133,4 +133,8 @@ The issue realated to frameid could be resolved if following topics are cover in
 
 
 lets track the camera’s position in the global frame.
-Add two cameras i.e ```camera_1```  and ```camera_2``` to a TF tree and add an action graph to both the prims of cameras and publish their TF's and visulaize their orientation in rviz
+Add two cameras i.e ```camera_1```  and ```camera_2``` to a TF tree and add an action graph to both the prims of cameras and publish their TF's and visulaize their orientation in rviz. notice both cameras parent link is set to ```world`` as a fixed frame. 
+
+The issue is these relative transform are static and are not moving as the robot is moving in isaac sim because the robot's odometery is not setup. we need to publish the odometry ROS message as well as its corresponding transforms.
+
+
