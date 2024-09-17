@@ -98,4 +98,15 @@ Even though ros clock is not immediately necessary to sync to either simulation 
 
 
 
-[next step](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_clock.html#isaac-sim-app-tutorial-ros2-clock:~:text=and%20Subscriber%20nodes.-,Next%20Steps,-%EF%83%81)
+## Lidar with ROS2
+Learn how to interface lidar with ros2. [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_rtx_lidar.html#:~:text=RTX%20Lidar%20Sensors-,RTX%20Lidar%20Sensors,-%EF%83%81)
+
+
+
+Meaning of nodes:
+- On playback tick: triggers all the nodes once played
+- Isaac Run One Simulation Frame: This is the node to running the create render product pipeline once at the start to improve performance.
+- ROS2 Context: This node creates a ros2 context for a given domain id.
+- Isaac Create Render Product: Create a render product. target prim select the RTX Lidar.
+- ROS2 RTX Lidar Helper: This node will handle publishing of the laser scan message from the rtx lidar
+- If you wish to also publish point cloud data, add another ROS2 RTX Lidar Helper node, and under input type select point_cloud and change the topic name to point_cloud. 
