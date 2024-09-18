@@ -137,4 +137,6 @@ Add two cameras i.e ```camera_1```  and ```camera_2``` to a TF tree and add an a
 
 The issue is these relative transform are static and are not moving as the robot is moving in isaac sim because the robot's odometery is not setup. we need to publish the odometry ROS message as well as its corresponding transforms.
 
+For detailed tutorial please follow the link [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_tf.html#isaac-sim-app-tutorial-ros2-tf:~:text=Trees%20and%20Odometry-,ROS2%20Transform%20Trees%20and%20Odometry,-%EF%83%81)
+
 
