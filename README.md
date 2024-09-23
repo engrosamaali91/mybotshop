@@ -140,3 +140,9 @@ The issue is these relative transform are static and are not moving as the robot
 For detailed tutorial please follow the link [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_tf.html#isaac-sim-app-tutorial-ros2-tf:~:text=Trees%20and%20Odometry-,ROS2%20Transform%20Trees%20and%20Odometry,-%EF%83%81)
 
 
+To visualize rqt graph and their parent child relation please use the following command 
+```
+ ros2 run rqt_tf_tree rqt_tf_tree  --force-discover
+```
+
+
