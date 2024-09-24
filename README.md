@@ -79,11 +79,10 @@ Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tu
 - Introduction to ROS2 Bridge omnigraph nodes
 - Subscribing to a ROS2 Twist message
 
-
-If you are strictly following the tutorials of isaac sim please do not forget to apply the differential controller on your two wheeled custom robot.
 I applied it on custom robot and i am able to control it using keyboard just like turtlebot.
 
-At this momenet the transforms of the robot relative to the world frame is not being published therefore i am not able to visualize it rviz and rqt_tf_tree
+At this momenet the transforms of the robot relative to the world frame is not being published therefore i am not able to visualize it rviz and rqt_tf_tree. 
+The articulation is enabled on base_footprint for turtlebot3 and for custom robot it is enabled on mock_robot prim
 
 ## ROS2 Cameras
 Understand how to publish camera and perception data in ROS2.
