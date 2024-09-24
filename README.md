@@ -104,10 +104,12 @@ Even though ros clock is not immediately necessary to sync to either simulation 
 
 ## Lidar with ROS2
 Learn how to interface lidar with ros2. [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_rtx_lidar.html#:~:text=RTX%20Lidar%20Sensors-,RTX%20Lidar%20Sensors,-%EF%83%81)
+Before doing this tutorial watch how to attach lidar on a custom or prebuilt robot [lidar_attach_with_custom_robot](https://docs.omniverse.nvidia.com/isaacsim/latest/advanced_tutorials/tutorial_advanced_range_sensor_lidar.html#isaac-sim-app-tutorial-advanced-range-sensor-lidar:~:text=Using%20Sensors%3A%20LIDAR-,Using%20Sensors%3A%20LIDAR,-%EF%83%81)
 
 ![Action graph for lidar](./ros2_rtx_lidar_graph_rviz.png)
 
 Watch how it is visulaized in rviz2 along side isaac sim 
+
 ![Lidar](./lidar.gif)
 
 This tutorial covered creating and using the RTX Lidar Sensor with ROS2:
