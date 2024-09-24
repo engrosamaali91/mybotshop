@@ -137,7 +137,10 @@ Now learn how to add global and relative transforms to a TF tree in next section
 [ROS2 Transform Trees and Odometry](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_tf.html#isaac-sim-app-tutorial-ros2-tf:~:text=Trees%20and%20Odometry-,ROS2%20Transform%20Trees%20and%20Odometry,%EF%83%81,-Learning%20Objectives)
 
 
+## Display multiple sensors in rviz2
+All the messages should be synced up and timestamped correctly if using multiple sensors.
 
+To visualize all the sensors as well as the tf tree all at once inside RViz, the frameId and topicNames must follow a certain convention [for reference](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_rtx_lidar.html#multiple-sensors-in-rviz2)
 
 ## ROS2 Transform Trees and Odometry
 The issue realated to frameid could be resolved if following topics are cover in this tutorial.
