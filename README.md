@@ -142,6 +142,9 @@ All the messages should be synced up and timestamped correctly if using multiple
 
 To visualize all the sensors as well as the tf tree all at once inside RViz, the frameId and topicNames must follow a certain convention [for reference](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_rtx_lidar.html#multiple-sensors-in-rviz2)
 
+I set the frame id to world after change frame_id of lidar to world now i can visualize camera, laser scan and point cloud at the same time in rviz2
+![multiple_sensors](./multiple_sensors.png)
+
 ## ROS2 Transform Trees and Odometry
 The issue realated to frameid could be resolved if following topics are cover in this tutorial.
 
