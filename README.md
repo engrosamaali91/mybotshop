@@ -83,6 +83,8 @@ Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tu
 If you are strictly following the tutorials of isaac sim please do not forget to apply the differential controller on your two wheeled custom robot.
 I applied it on custom robot and i am able to control it using keyboard just like turtlebot.
 
+At this momenet the transforms of the robot relative to the world frame is not being published therefore i am not able to visualize it rviz and rqt_tf_tree
+
 ## ROS2 Cameras
 Understand how to publish camera and perception data in ROS2.
 [attach a camera and visualize it in rviz](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_camera.html#:~:text=ROS2%20Cameras-,ROS2%20Cameras,-%EF%83%81)
