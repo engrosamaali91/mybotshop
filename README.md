@@ -74,7 +74,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 Follow this [tutorial](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_drive_turtlebot.html#getting-started:~:text=ROS2%20Twist%20message-,Getting%20Started,%EF%83%81,-Important) to understand these ros2 bridge with isac sim concepts
-![Isaac sim workflow](./ros2_turtlebot_graph.png)
+![Driving TurtleBot via ROS2 messages](./ros2_turtlebot_graph.png)
 - Drive the robot using the Differential Controller and the Articulation Controller
 - Introduction to ROS2 Bridge omnigraph nodes
 - Subscribing to a ROS2 Twist message
