@@ -1,7 +1,7 @@
 # Why did we choose isaac sim 
 ![Isaac sim workflow](./isaac.svg)
 
-I have cloned isaac sim ros2 packages in this workspace ```IsaacSim-ros_workspaces/humble_ws``` [guidep](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_ros.html#isaac-sim-app-install-ros:~:text=for%20you%20workflow.-,Setting%20Up%20Workspaces,%EF%83%81,-Note)
+I have cloned isaac sim ros2 packages in this workspace ```IsaacSim-ros_workspaces/humble_ws``` [how to setup workspace isaac sim ros2](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_ros.html#isaac-sim-app-install-ros:~:text=for%20you%20workflow.-,Setting%20Up%20Workspaces,%EF%83%81,-Note)
 
 
 # Assemble a Custom Robot in ISAAC Sim
