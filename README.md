@@ -1,3 +1,6 @@
+Prior to following these tutorials please ensure ros2 humble workspace is cloned, build and source properly. [Link](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_ros.html#isaac-ros-workspace)
+
+
 # Why did we choose isaac sim 
 ![Isaac sim workflow](./isaac.svg)
 
