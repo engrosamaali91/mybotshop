@@ -164,5 +164,6 @@ To visualize rqt graph and their parent child relation please use the following 
 ```
  ros2 run rqt_tf_tree rqt_tf_tree  --force-discover
 ```
-
+I set to the articualtion root on turtlebot3_burger prim instead of base_link, this allowed me to visualize all the child frame of base_link
+![Transforms relative to world](./TFs.png)
 
