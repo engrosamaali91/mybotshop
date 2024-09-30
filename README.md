@@ -233,3 +233,5 @@ Go to the cloned repository, source it and launch this file after playing the si
 ```
 ros2 launch carter_navigation carter_navigation.launch.py
 ```
+You should be able to give the goal position to carter through rviz 
+![Carter in action](carter_navigation_box.gif)
