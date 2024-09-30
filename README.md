@@ -223,3 +223,13 @@ If you dont see the robot in gazebo you can insert the robot model in insert>Add
 After starting, the robot initially has no idea where it is. Give the starting position by clicking the “2D Pose Estimate” button in RViz, After setting the initial pose, the transform tree will be complete and Nav2 will be fully active and ready to go.
 
 Now give a goal position using ```Nav2Goal``` in rviz
+
+After having the packages installed and pre-requisites done generate [Occupancy Map](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation:~:text=external%20pointcloud_to_laserscan%20node) by following the instruction carefuly and save file occupancy map paramters file called ```carter_warehouse_navigation.yaml``` and map file called ```carter_warehouse_navigation.png``` in map folder of cater_navigation package.
+
+An occupancy map is now ready to be used with Nav2!
+
+[Running Nav2](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation:~:text=used%20with%20Nav2!-,Running%20Nav2,-%EF%83%81) Nav2 with Nova Carter in Small Warehouse.
+Go to the cloned repository, source it and launch this file after playing the simulation
+```
+ros2 launch carter_navigation carter_navigation.launch.py
+```
