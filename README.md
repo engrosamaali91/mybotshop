@@ -188,3 +188,25 @@ In ROS2-sourced terminal, run the following command to retrieve the QoS settings
 
 ## [ROS2 Navigation](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation:~:text=ROS2%20Navigation-,ROS2%20Navigation,%EF%83%81,-Note)
 
+### NAV2 installation guide
+Install the Nav2 packages 
+```
+sudo apt install ros-humble-navigation2
+sudo apt install ros-humble-nav2-bringup
+```
+Ensure navigation2 and nav2-bringup is installed 
+```
+apt list --installed | grep ros-humble-navigation2
+```
+```
+apt list --installed | grep ros-humble-nav2-bringup
+```
+
+Install Turtlebot 3 packages
+```
+sudo apt install ros-humble-turtlebot3-gazebo
+```
+Ensure turtlebot3 pacakge is installed 
+```
+apt list --installed | grep ros-humble-turtlebot3-gazebo
+```
