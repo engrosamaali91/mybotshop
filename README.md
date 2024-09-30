@@ -174,5 +174,10 @@ Learn about
 - Set the simulation frame rate in Isaac Sim.
 - Set different publish rates for various ROS2 publishers simultaneously.
 
+## [ROS 2 Quality of Service (QoS)](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_qos.html#isaac-sim-app-tutorial-ros2-qos:~:text=of%20Service%20(QoS)-,ROS%202%20Quality%20of%20Service%20(QoS),%EF%83%81,-Learning%20Objectives)
 
+Learn about 
+- QoS Profile Node.
+- Setting Quality of Service (QoS) for all ROS2 OmniGraph nodes.
+- Setting a static ROS2 publisher using a custom QoS Profile.
 
