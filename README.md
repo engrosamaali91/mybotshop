@@ -210,3 +210,16 @@ Ensure turtlebot3 pacakge is installed
 ```
 apt list --installed | grep ros-humble-turtlebot3-gazebo
 ```
+
+In the same terminal run to open rviz and gazebo  
+```
+ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
+```
+This launch file will launch Nav2 with the AMCL localizer in the ```turtlebot3_world``` world. It will also launch the robot state publisher to provide transforms, a Gazebo instance with the Turtlebot3 URDF, and RVIZ.
+
+If you dont see the robot in gazebo you can insert the robot model in insert>Add Path>Turtlebot3(Waffle)
+
+
+After starting, the robot initially has no idea where it is. Give the starting position by clicking the “2D Pose Estimate” button in RViz, After setting the initial pose, the transform tree will be complete and Nav2 will be fully active and ready to go.
+
+Now give a goal position using ```Nav2Goal``` in rviz
