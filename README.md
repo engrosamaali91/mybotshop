@@ -168,3 +168,11 @@ To visualize rqt graph and their parent child relation please use the following 
 I set to the articualtion root on turtlebot3_burger prim instead of base_link, this allowed me to visualize all the child frame of base_link
 ![Transforms relative to world](./TFs.png)
 
+
+## [ROS2 Setting Publish Rates](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_publish_rate.html#isaac-sim-app-tutorial-ros2-publish-rate:~:text=Setting%20Publish%20Rates-,ROS2%20Setting%20Publish%20Rates,-%EF%83%81)
+Learn about 
+- Set the simulation frame rate in Isaac Sim.
+- Set different publish rates for various ROS2 publishers simultaneously.
+
+
+
