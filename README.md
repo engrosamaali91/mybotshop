@@ -210,6 +210,11 @@ Ensure turtlebot3 pacakge is installed
 ```
 apt list --installed | grep ros-humble-turtlebot3-gazebo
 ```
+Source a terminal and export robot model 
+```
+export TURTLEBOT3_MODEL=waffle
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/<ros2-distro>/share/turtlebot3_gazebo/models
+```
 
 In the same terminal run to open rviz and gazebo  
 ```
