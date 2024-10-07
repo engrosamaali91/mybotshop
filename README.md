@@ -247,4 +247,19 @@ You should be able to give the goal position to carter through rviz
 > save the occupancy map with the generated occupancy map name in isaac.  
 
 
+## [Simulating people in the scene](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Omni.Anim.People-,Omni.Anim.People,%EF%83%81,-Warning)
+
+A simulation consists of a sequence of actions for each character in the scene to perform. There are five supported character actions:
+
+- Idle
+- Look around
+- Queue
+- Sit/Stand
+- Walk
+
+Steps:
+- Enable extensaion in isaac sim [omni.anim.people](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Walk-,Enable%20omni.anim.people,-%EF%83%81)
+- Load people simulation from windows/people_simulation
+- Spawn characters and goto location information from command window and load characters
+- 
 
