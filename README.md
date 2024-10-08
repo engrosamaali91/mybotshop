@@ -264,7 +264,7 @@ A simulation consists of a sequence of actions for each character in the scene t
 - Disable Show By Type > Navmesh
 
 
-[Manually Setup Characters]
+[Manually Setup Characters](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=creating%20a%20simulation.-,Manually%20Setup%20Characters,-%EF%83%81) 
 - Create Xform under /World and rename it to Characters
 - Drag the character and the biped setup to the characters
 - enable omni.anim.people extension from window > extensions
