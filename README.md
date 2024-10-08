@@ -257,9 +257,19 @@ A simulation consists of a sequence of actions for each character in the scene t
 - Sit/Stand
 - Walk
 
-Steps:
-- Enable extensaion in isaac sim [omni.anim.people](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Walk-,Enable%20omni.anim.people,-%EF%83%81)
-- Load people simulation from windows/people_simulation
-- Spawn characters and goto location information from command window and load characters
-- 
+[Setup Simulation from scratch](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=animation%20graph%20nodes.-,Setup%20Simulation%20From%20Scratch,-%EF%83%81):
+- Add NavMesh Volume Create->Navigation->NavMeshVolume
+- Adjust Navmesh settings
+- Bake NavMesh
+- Disable Show By Type > Navmesh
 
+
+[Manually Setup Characters]
+- Create Xform under /World and rename it to Characters
+- Drag the character and the biped setup to the characters
+- enable omni.anim.people extension from window > extensions
+- expand each character while holding cntrl until SkelRoot type > Right click > Add > Animiation > Animation Graph
+- Similarly add python script ```character_behavior.py```  SkelRoot type > Right click > Add > Python Scripting
+- Open text file and give goto commans example ```SkelRoot_name GoTo 10 10 0 _``` and add the files path to the people_simulation
+- Bake it and switch off  NavMesh based simulation from people simulation before playing. Otherwise the character wont move as desired
+-  
