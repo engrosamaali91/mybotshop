@@ -272,4 +272,3 @@ A simulation consists of a sequence of actions for each character in the scene t
 - Similarly add python script ```character_behavior.py```  SkelRoot type > Right click > Add > Python Scripting
 - Open text file and give goto commans example ```SkelRoot_name GoTo 10 10 0 _``` and add the files path to the people_simulation
 - Bake it and switch off  NavMesh based simulation from people simulation before playing. Otherwise the character wont move as desired
--  
