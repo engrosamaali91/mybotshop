@@ -257,7 +257,10 @@ You should be able to give the goal position to carter through rviz
 
 
 - Open a terminal and run Nav2 launch file ```ros2 launch carter_navigation carter_navigation.launch.py```
-- Open another terminal and run isaac_ros_navigation_goal launch file, to start sending goals automatically ```ros2 launch isaac_ros_navigation_goal isaac_ros_navigation_goal.launch.py``` this will give three goals automatically as defined in goals.txt file
+- Open another terminal and run isaac_ros_navigation_goal launch file, to start sending goals automatically ```ros2 launch isaac_ros_navigation_goal isaac_ros_navigation_goal.launch.py``` this will give three goals automatically as defined in goals.txt file.
+
+> [!Note]
+> The paramters such as ```iteration_count``` and ```obsctacle_search_distance_in_meters``` can be changed in launch file under ```isaac_ros_navigation_goal/launch```
 
 ## [Simulating people in the scene](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Omni.Anim.People-,Omni.Anim.People,%EF%83%81,-Warning)
 
