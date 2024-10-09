@@ -244,8 +244,12 @@ You should be able to give the goal position to carter through rviz
 ![Carter in action](carter_navigation_box.gif)
 
 > [!WARNING]  
-> save the occupancy map with the generated occupancy map name in isaac.  
+> save the occupancy map with the generated occupancy map name in isaac.
 
+> [!Issues encountered]
+> Tried to add people animation in navigation scene but the character did not move. Alternatively i directly gave GoTo command from the people_simulation.
+> The Lidar of Cartar Nova robot has liimited min rage set in simulation therefore it collides with humans 
+> In real Carter Nova has HESAI XT 32 lidar that has 0.05m range. Look into urdf setting to adjust the min and max rage 
 
 ## [Simulating people in the scene](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Omni.Anim.People-,Omni.Anim.People,%EF%83%81,-Warning)
 
@@ -276,3 +280,4 @@ A simulation consists of a sequence of actions for each character in the scene t
 
 > [!Note]
 > Avoid Moving Objects attach ```dynamic_obstacle.py``` to the cube and observe the character will avoid this slow moving cube
+
