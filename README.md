@@ -253,6 +253,12 @@ You should be able to give the goal position to carter through rviz
 
 ![Collision due to min rnge](carter_with_human.gif)
 
+### [Sending goals programatically](https://docs.omniverse.nvidia.com/isaacsim/latest/ros2_tutorials/tutorial_ros2_navigation.html#:~:text=29%20/%2000%3A29-,Sending%20Goals%20Programmatically,-%EF%83%81)
+
+
+- Open a terminal and run Nav2 launch file ```ros2 launch carter_navigation carter_navigation.launch.py```
+- Open another terminal and run isaac_ros_navigation_goal launch file, to start sending goals automatically ```ros2 launch isaac_ros_navigation_goal isaac_ros_navigation_goal.launch.py``` this will give three goals automatically as defined in goals.txt file
+
 ## [Simulating people in the scene](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Omni.Anim.People-,Omni.Anim.People,%EF%83%81,-Warning)
 
 A simulation consists of a sequence of actions for each character in the scene to perform. There are five supported character actions:
