@@ -251,7 +251,7 @@ You should be able to give the goal position to carter through rviz
 > The Lidar of Cartar Nova robot has liimited min rage set in simulation therefore it collides with humans 
 > In real Carter Nova has HESAI XT 32 lidar that has 0.05m range. Look into urdf setting to adjust the min and max rage
 
-![Collision due to min rage](carter_with_navigation.gif)
+![Collision due to min rnge](carter_with_human.gif)
 
 ## [Simulating people in the scene](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Omni.Anim.People-,Omni.Anim.People,%EF%83%81,-Warning)
 
