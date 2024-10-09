@@ -246,7 +246,7 @@ You should be able to give the goal position to carter through rviz
 > [!WARNING]  
 > save the occupancy map with the generated occupancy map name in isaac.
 
-> [!Issues encountered]
+> [!Important]
 > Tried to add people animation in navigation scene but the character did not move. Alternatively i directly gave GoTo command from the people_simulation.
 > The Lidar of Cartar Nova robot has liimited min rage set in simulation therefore it collides with humans 
 > In real Carter Nova has HESAI XT 32 lidar that has 0.05m range. Look into urdf setting to adjust the min and max rage 
