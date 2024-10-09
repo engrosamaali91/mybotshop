@@ -262,6 +262,11 @@ You should be able to give the goal position to carter through rviz
 > [!Note]
 > The paramters such as ```iteration_count``` and ```obsctacle_search_distance_in_meters``` can be changed in launch file under ```isaac_ros_navigation_goal/launch```
 
+### Summary
+- Occupancy map was generated in an inconvential way. Further learn about [mapping](https://docs.omniverse.nvidia.com/isaacsim/latest/features/ext_omni_isaac_occupancy_map.html#ext-omni-isaac-occupancy-map)
+- Running Isaac Sim with [Nav2](https://nav2.org/)
+- Running the Isaac ROS2 Navigation Goal package to send nav goals programmatically.
+
 ## [Simulating people in the scene](https://docs.omniverse.nvidia.com/isaacsim/latest/features/warehouse_logistics/ext_omni_anim_people.html#:~:text=Omni.Anim.People-,Omni.Anim.People,%EF%83%81,-Warning)
 
 A simulation consists of a sequence of actions for each character in the scene to perform. There are five supported character actions:
