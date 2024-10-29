@@ -148,6 +148,8 @@ To visualize all the sensors as well as the tf tree all at once inside RViz, the
 I set the frame id to world after change frame_id of lidar to world now i can visualize camera, laser scan and point cloud at the same time in rviz2
 ![multiple_sensors](./multiple_sensors.png)
 
+We can visualize depth using the ```rqt_image_view``` method again ```ros2 run rqt_image_view rqt_image_view /depth```
+
 ## ROS2 Transform Trees and Odometry
 The issue realated to frameid could be resolved if following topics are cover in this tutorial.
 
