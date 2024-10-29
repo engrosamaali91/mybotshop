@@ -150,6 +150,11 @@ I set the frame id to world after change frame_id of lidar to world now i can vi
 
 We can visualize depth using the ```rqt_image_view``` method again ```ros2 run rqt_image_view rqt_image_view /depth```
 
+
+> [!Important]
+> Ensure that the ```use_sim_time``` ROS2 param is set to true after running the RViz2 node. This ensures that the RViz2 node is synchronized with the simulation data especially when RViz2 interpolates position of Lidar data points. Set the parameter using the following command in a new ROS2-sourced terminal:
+> ```ros2 param set /rviz use_sim_time true```
+
 ## ROS2 Transform Trees and Odometry
 The issue realated to frameid could be resolved if following topics are cover in this tutorial.
 
