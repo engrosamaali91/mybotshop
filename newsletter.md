@@ -114,8 +114,10 @@ Gazebo Classic is a straightforward and reliable simulation platform for robotic
 - **Community Support:**  
   As a legacy platform, Gazebo Classic boasts extensive online support and documentation, unlike the relatively newer Gazebo Fortress.
 
-#### Use Cases for Gazebo Classic:
-Gazebo Classic is an excellent choice for testing algorithms, designing robots, and simulating indoor and outdoor environments. Later in the experiments the navigation stack was tested on gazebo classic environment. Its combination of moderate computational requirements, reasonable graphics, and faster performance makes it a practical option for those who prioritize functionality over high-definition realism.
+#### A Drawback: Lack of Realistic Crowd Animation
+While Isaac Sim offers realistic crowd animation to test moving humans in a simulated environment, Gazebo Classic does not have this feature. However, Gazebo Classic compensates for this limitation by allowing objects to be dropped in the middle of navigation to test **dynamic obstacle detection**. This functionality ensures that algorithms can still be validated for real-world scenarios involving unexpected obstacles.
 
+#### Use Cases for Gazebo Classic:
+Gazebo Classic is an excellent choice for testing algorithms, designing robots, and simulating indoor and outdoor environments. Its combination of moderate computational requirements, reasonable graphics, and faster performance makes it a practical option for those who prioritize functionality over high-definition realism.
 
 
