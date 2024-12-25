@@ -1,2 +1,83 @@
 # Digital Twin-Driven Safety Protocol Development for HRI in German Retail Stores
 ![workflow](nl/workflow.jpg)
+Autonomous mobile robots are becoming increasingly intelligent through the integration of Artificial Intelligence (AI). These robots are now capable of making real-time decisions, such as determining optimal paths, navigating around obstacles, and dynamically choosing new routes. With advanced sensors like LiDAR and cameras, robots can detect and respond to both stationary and moving objects, ensuring the safety of people, themselves, and the surrounding environment.
+
+However, to operate safely and effectively, robots must adhere to strict safety protocols and comply with data protection regulations when interacting with humans. This is crucial to minimize risks, especially when deploying autonomous robots in settings such as retail stores or warehouses. Without thorough testing, there is a risk of accidents, injuries, or inventory damage. As a result, authorities have established safety regulations to ensure that robots are designed with compliance in mind.
+
+To address these challenges, MYBOTSHOP is investing significant time and resources into training students to test and validate safety protocols and data protection policies for both new and existing robots within simulation environments. These simulated tests ensure that robots can be safely deployed in real-world scenarios without jeopardizing human lives or privacy.
+
+## Comparision of Simulation Environments
+![Simulation Environments](nl/SE.jpg)
+
+
+Testing autonomous robots in simulation environments is essential to evaluate their performance under both expected and unexpected conditions. This raises an important question: **Which simulation environment is best for testing diverse scenarios?**
+
+To answer this, let’s compare three prominent simulation platforms: **Gazebo Classic**, **Gazebo Fortress**, and **NVIDIA Isaac Sim** (developed by Omniverse). Each platform has unique strengths and limitations, as highlighted in the **comparison chart above**.
+
+- **Gazebo Classic** offers ease of environment setup and a fast simulation speed but lacks support for high-definition simulations and crowd animation. It is a reliable choice for basic ROS2 integration without requiring high-end hardware.
+- **Gazebo Fortress** improves on crowd animation and introduces high-definition simulation capabilities. However, it is more resource-intensive and less user-friendly in terms of built-in plugins.
+- **NVIDIA Isaac Sim** stands out for its high-fidelity simulation and reinforcement learning support, making it ideal for advanced robotics applications. However, it demands high processing power and has a steeper learning curve for ROS2 integration.
+
+As illustrated in the **image above**, Gazebo Classic excels in simplicity, while NVIDIA Isaac Sim leads in advanced simulation capabilities. Choosing the right platform depends on your project's specific requirements, such as simulation fidelity or hardware limitations.
+
+
+### Observations on NVIDIA Isaac Sim for Simulation
+
+NVIDIA Isaac Sim is a cutting-edge simulation platform that serves dual purposes: simulation testing and reinforcement learning. In Omni Isaac Gym, robots can be trained effectively for complex tasks. However, while Isaac Sim offers many advantages, as highlighted in the comparison table, it may not always be the best solution for simulations as a test bench.
+
+#### Pros of Isaac Sim:
+- High-definition, realistic 3D scenes for immersive simulations.
+- Integration with reinforcement learning frameworks for advanced robotic training.
+- Built-in examples like Nova Carter robot navigation in warehouse environments.
+
+#### Cons of Isaac Sim:
+- Requires high processing power, leading to potential lag in real-time applications.
+- Challenges in adapting custom robots and environments, especially with configuring TF for parent-child relations.
+- Slower map updates in RViz2, making real-time obstacle detection less reliable.
+
+---
+
+### Real-World Test: Navigation in a Warehouse Environment
+
+![NOVA CARTER ROBOT](nl/novacarter.png)
+In our observations, we tested the **Nova Carter robot** as show in the image above, for navigation in a small warehouse environment using Isaac Sim. The robot, equipped with 2D and 3D LiDAR, fisheye, and depth cameras, was tasked to navigate static and dynamic obstacles.
+
+- **Static Obstacle Navigation** (Scene 1):  
+  The image below depicts Isaac Sim and RViz2 side-by-side, with the robot planning a path around a static object in the warehouse. While the high-definition scene enhances realism, the robot experiences noticeable lag due to the computational demand of the graphics.
+
+  ![Scene_1](carter_navigation_box.gif)
+
+- **Dynamic Obstacle Detection** (Scene 2):  
+  For dynamic obstacles, such as a person walking through the environment, the simulation struggled to update the map in real-time. By the time the person was detected and the map updated in RViz2, the person had already moved forward, leaving outdated occupancy marks. This delay compromises the reliability of real-time obstacle detection, an issue tied to the simulation and less likely to occur in real-world scenarios.
+  
+  ![Scene_2](carter_with_human.gif)
+---
+
+### Tradeoff: Graphics vs. Speed
+
+Isaac Sim’s high graphics quality comes at the cost of simulation speed. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like **Gazebo**, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.
+
+---
+
+### Challenges with Isaac Sim for Custom Robots
+
+Another critical challenge is adapting Isaac Sim nodes for custom robots and environments. For instance:
+- Configuring TF for custom robots often leads to issues with Isaac Sim’s built-in nodes failing to recognize parent-child relationships, causing delinked transforms.
+- As shown in the RQT graph (image), we ensured the custom robot’s transforms were correctly linked to the world frame, but configuring this required additional effort.
+
+Isaac Sim provides several ROS2 nodes for handling TF transforms and odometry, such as:
+- **TF Publisher** for sensors and full articulation trees.
+- **Raw TF Publisher** for individual transforms.
+- **Odometry Publisher** for robot movement tracking.
+
+These nodes can be visualized in the Isaac Sim viewport for better debugging. However, the overhead in adapting and troubleshooting these nodes can be time-consuming.
+
+---
+
+### Recommendations
+
+While Isaac Sim is an excellent platform for high-fidelity simulations, it is not always ideal for scenarios requiring speed and efficiency. For testing safety protocols or creating realistic digital twins, alternatives like Gazebo might offer a more balanced solution. High-definition graphics are secondary to the ability to reliably test algorithms under realistic constraints.
+
+
+
+
