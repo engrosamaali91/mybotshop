@@ -7,6 +7,7 @@ However, to operate safely and effectively, robots must adhere to strict safety 
 To address these challenges, MYBOTSHOP is investing significant time and resources into training students to test and validate safety protocols and data protection policies for both new and existing robots within simulation environments. These simulated tests ensure that robots can be safely deployed in real-world scenarios without jeopardizing human lives or privacy.
 
 ## Comparision of Simulation Environments
+
 ![Simulation Environments](nl/SE.jpg)
 
 
@@ -39,7 +40,12 @@ NVIDIA Isaac Sim is a cutting-edge simulation platform that serves dual purposes
 
 ### Real-World Test: Navigation in a Warehouse Environment
 
-![NOVA CARTER ROBOT](nl/novacarter.png)
+![NOVA CARTER ROBOT](https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png/)
+
+*[Figure 1: NOVA Carter Robot navigating a warehouse environment.][1]*
+
+[1]: https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png/ "Image source: Website Name"
+
 In our observations, we tested the **Nova Carter robot** as show in the image above, for navigation in a small warehouse environment using Isaac Sim. The robot, equipped with 2D and 3D LiDAR, fisheye, and depth cameras, was tasked to navigate static and dynamic obstacles.
 
 - **Static Obstacle Navigation** (Scene 1):  
@@ -49,21 +55,22 @@ In our observations, we tested the **Nova Carter robot** as show in the image ab
 
 - **Dynamic Obstacle Detection** (Scene 2):  
   For dynamic obstacles, such as a person walking through the environment, the simulation struggled to update the map in real-time. By the time the person was detected and the map updated in RViz2, the person had already moved forward, leaving outdated occupancy marks. This delay compromises the reliability of real-time obstacle detection, an issue tied to the simulation and less likely to occur in real-world scenarios.
-  
+
   ![Scene_2](carter_with_human.gif)
 ---
 
 ### Tradeoff: Graphics vs. Speed
 
-Isaac Sim’s high graphics quality comes at the cost of simulation speed. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like **Gazebo**, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.
+Isaac Sim’s high graphics quality comes at the cost of simulation speed as show is the image above. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like **Gazebo**, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.
 
 ---
 
 ### Challenges with Isaac Sim for Custom Robots
 
 Another critical challenge is adapting Isaac Sim nodes for custom robots and environments. For instance:
-- Configuring TF for custom robots often leads to issues with Isaac Sim’s built-in nodes failing to recognize parent-child relationships, causing delinked transforms.
-- As shown in the RQT graph (image), we ensured the custom robot’s transforms were correctly linked to the world frame, but configuring this required additional effort.
+Configuring TF for custom robots often leads to issues with Isaac Sim’s built-in nodes failing to recognize parent-child relationships, causing delinked transforms. For example the image below shows proper links with parent and child frames.
+
+![Transforms](nl/TFs.png)
 
 Isaac Sim provides several ROS2 nodes for handling TF transforms and odometry, such as:
 - **TF Publisher** for sensors and full articulation trees.
@@ -72,7 +79,7 @@ Isaac Sim provides several ROS2 nodes for handling TF transforms and odometry, s
 
 These nodes can be visualized in the Isaac Sim viewport for better debugging. However, the overhead in adapting and troubleshooting these nodes can be time-consuming.
 
----
+![Isaac Sim Nodes](https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png)
 
 ### Recommendations
 
