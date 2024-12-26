@@ -120,4 +120,113 @@ While Isaac Sim offers realistic crowd animation to test moving humans in a simu
 #### Use Cases for Gazebo Classic:
 Gazebo Classic is an excellent choice for testing algorithms, designing robots, and simulating indoor and outdoor environments. Its combination of moderate computational requirements, reasonable graphics, and faster performance makes it a practical option for those who prioritize functionality over high-definition realism.
 
+----
 
+### Gazebo Fortress: The Bridge Between Classic and Modern Simulation
+
+Gazebo Fortress, the successor to Gazebo Classic, brings modern features and improved performance while maintaining the familiar usability of its predecessor. It offers enhanced simulation capabilities, making it a strong contender for robotics testing. However, it also introduces some complexities compared to Gazebo Classic, especially for those migrating existing ROS2 packages.
+
+#### Key Features of Gazebo Fortress:
+- **Improved Graphics and High-Definition Simulation:**  
+  Gazebo Fortress enhances the graphical fidelity over Classic, offering more immersive environments. While not as graphically detailed as Isaac Sim, Fortress strikes a balance between realism and performance.
+- **Better Support for Dynamic Environments:**  
+  Fortress introduces features like improved collision detection and smoother handling of dynamic objects, which are critical for testing algorithms involving moving obstacles.
+- **Enhanced Plugin Ecosystem:**  
+  A rich plugin ecosystem allows for better integration of sensors and actuators, providing more flexibility for robot developers.
+- **Support for ROS 2 Packages:**  
+  Migrating ROS 2 packages from Gazebo Classic to Fortress is relatively straightforward, thanks to the [migration guide](https://gazebosim.org/docs/fortress/migrating_gazebo_classic_ros2_packages/). However, some adaptation may be needed, especially for custom robots or environments.
+
+#### Example: A Custom Four-Wheel Robot in Gazebo Fortress
+Take a look at the **GIF below**, showcasing **a custom four-wheel robot designed in Gazebo Fortress**. The robot demonstrates how Fortress’s enhanced features allow for more detailed and accurate simulations of navigation and other robotic functions.
+
+![Gazebo Fortress Custom Robot Design](nl/fortress_robot.gif)
+
+#### Observations on Gazebo Fortress Environment
+The **Gazebo Fortress environment** supports advanced features such as better collision detection and handling of dynamic obstacles. This makes it a suitable choice for testing algorithms in environments requiring higher fidelity than Gazebo Classic while maintaining a manageable computational load compared to Isaac Sim.
+
+#### Observations and Trade-Offs:
+- **Performance vs. Graphics:**  
+  While Gazebo Fortress improves graphical fidelity, it requires more processing power than Classic, though significantly less than Isaac Sim. This makes it a middle ground between the two platforms.
+
+- **Dynamic Obstacle Handling:**  
+  Fortress performs better than Classic in handling dynamic objects, making it suitable for navigation scenarios involving moving humans or obstacles. However, Isaac Sim still leads in dynamic crowd animation.
+
+- **Learning Curve:**  
+  For those already familiar with Gazebo Classic, transitioning to Fortress is manageable with the help of the [migration guide](https://gazebosim.org/docs/fortress/migrating_gazebo_classic_ros2_packages/). On the other hand, Isaac Sim’s steep learning curve might pose a challenge for newcomers.
+
+#### Recommendation:
+Gazebo Fortress is ideal for those seeking a balance between performance, graphics, and usability. It is particularly well-suited for developers migrating from Gazebo Classic or those looking for advanced features without the heavy computational requirements of Isaac Sim.
+
+
+
+---
+
+
+### Exploring Object Detection with ZED 2i Camera
+
+Before discussing use cases using Navigation2 in ROS2 Humble, I wanted to explore validation in a simulation environment by tackling a hands-on task. To do this, I worked with the industrial-level depth camera **ZED 2i** (refer to the image below).  
+
+Depth cameras are a crucial component of any robot. Acting as the robot's eyes, they enable the robot to not only see objects but also infer their distance from the camera. Unlike standard fisheye cameras, depth cameras like the ZED 2i allow robots to estimate the 3D pose of objects relative to the camera, which is vital for tasks such as navigation and object interaction.
+
+#### Why Depth Cameras Matter
+In scenarios where a robot relies heavily on its depth camera:
+- **Object Localization:** Depth cameras help estimate the location of objects in the environment while the robot is moving.  
+- **Human-Robot Interaction:** They enable robots to classify objects and humans, improving situational awareness in dynamic environments like retail stores.  
+- **Pose Estimation:** The 3D pose of objects can be calculated, helping robots identify the orientation and position of objects.  
+
+As shown in the **GIF below**, the robot classified a handbag with approximately 84% accuracy, demonstrating the capability to detect and classify objects. This was achieved using a trained YOLOv8 model, with data preprocessing and augmentation performed using **RoboFlow**.
+
+![3d Object pose detection](nl/Object_detection_wrt_camera_frame.gif)
+
+---
+
+### Why I Chose YOLOv8
+I selected the YOLOv8 model for this task because of its flexibility and support for multiple tasks such as detection, classification, and segmentation. Below is a comparison of its key features, which influenced my decision:
+
+| **Feature**                 | **YOLOv8**          | **YOLOv5** | **YOLOv4** |
+|-----------------------------|---------------------|------------|------------|
+| **Architecture**            | Unified Detection, Segmentation, Classification | Separate models | Separate models |
+| **Speed**                   | Faster than YOLOv5 | Moderate   | Slower     |
+| **Accuracy**                | Improved           | High       | Moderate   |
+| **Supported Modes**         | Detection, Classification, Segmentation | Detection, Classification | Detection only |
+| **Ease of Use**             | Intuitive          | Intuitive  | Moderate   |
+
+For more details, refer to the [YOLOv8 documentation](https://docs.ultralytics.com/models/yolov8/).
+
+Additionally, the comparison image below illustrates YOLOv8’s performance metrics relative to previous versions, highlighting its superior speed and accuracy.  
+
+![YOLOv8 Comparison](https://github.com/ultralytics/docs/releases/download/0/yolov8-comparison-plots.avif)  
+*Source: [YOLOv8 Documentation](https://docs.ultralytics.com/models/yolov8/)*
+
+These attributes make YOLOv8 a clear choice for real-time robotics applications where detection and classification tasks demand both accuracy and efficiency.
+
+
+---
+
+### Why I Chose ZED 2i
+The **ZED 2i** camera was an ideal choice for this task due to its built-in **body tracking feature**. In dynamic environments like retail stores, where humans are continuously moving, it is critical to track human bodies effectively. The ZED 2i’s advanced capabilities, such as tracking 18 key points of the human body, enable precise and reliable tracking.
+
+> Refer to the [ZED 2i Body Tracking Documentation](https://www.stereolabs.com/docs/body-tracking/) for more details.
+
+Here’s a visual representation of the 18 key points tracked by the ZED 2i camera:  
+![Body Tracking Key Points](https://docs.stereolabs.com/body-tracking/images/keypoints_body18.png)
+
+Below is a **GIF of a scene showcasing keypoints being detected in real-time** using the ZED 2i camera:  
+![Keypoints Detection GIF](nl/bodytracking.gif)
+
+The GIF illustrates how the ZED 2i camera accurately tracks and detects human movements by identifying body keypoints, ensuring seamless performance in dynamic environments like retail stores.
+
+
+---
+
+### Outcome and Applications
+The combination of the ZED 2i camera and YOLOv8 allowed the robot to:
+1. **Classify Objects with High Accuracy:** For example, identifying handbags, as shown in the GIF.  
+2. **Track Human Movements:** The built-in body tracking feature ensured accurate tracking of humans, which is crucial in environments like retail stores.  
+3. **Process Augmented Data:** Using RoboFlow for data preprocessing and augmentation streamlined the training process and improved detection accuracy.
+
+These insights and tools lay a strong foundation for creating robust object detection systems, especially in settings where robots need to navigate and interact with complex environments efficiently.
+
+---
+
+Would you like any further refinements or additions? Let me know! 😊
