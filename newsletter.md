@@ -306,10 +306,64 @@ Here is the summary of all the safety protocols that are relevant for the retail
 | **ISO 12100**       | Defines principles for risk assessment and reduction in machinery, providing guidelines to identify hazards and implement protective measures. | Provides a framework for risk assessment and mitigation in digital twin simulations, assisting in the development of safety protocols for retail robot behavior. | Need to validate assessment models through iterative tests in digital twin and real-world conditions. |
 
 
+---
 
+### Data Protection Policies: Ensuring Privacy in Retail Robot Operations
 
+After discussing and identifying some of the key safety protocols—an integral part of any retail store environment—we now focus on **data protection policies**. Privacy is a critical concern, as most people would want their personal information, including facial data, to remain secure. At the same time, detection using cameras is an essential aspect of ensuring the safety and protection of people around robots.
+
+To address this challenge, a solution must allow robots to detect individuals in a retail store environment **without compromising their privacy**. For example, a robot could detect a person’s presence, blur their face region, and display this blurred face on the robot's interface. This ensures the person's identity is protected while the robot continues to navigate safely, avoiding possible collisions.
+
+Below are some of the **data protection policies** identified for this study:
+
+| **Protocol Name** | **Summary**                                                                                                  | **Relevance**                                                                                                      | **Future Work/Gaps**                                                                                      |
+|-------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| **IEEE 7000**     | Ethical guidelines for system design, focusing on privacy, transparency, and data protection in systems interacting with humans.                  | Guides ethical implementation of robotics, ensuring privacy, transparency, and data management where robots interact with people, especially in retail. | Ethical principles need wider adoption in robotic design, especially in automated decision-making and transparency in human-robot interactions. |
+| **GDPR**          | Regulates data protection and privacy in the EU, providing guidelines for lawful data processing, ensuring consent, transparency, and the right to erasure. | Ensures personal data collected during person detection in retail is handled securely and compliant with privacy regulations. | Further refinement is needed in automated anonymization, real-time monitoring, and adapting to evolving privacy and security requirements. |
 
 ---
+
+### Leveraging Ultralytics YOLO11 for Privacy Protection
+
+During the exploration of data protection policies, I utilized the latest release from Ultralytics: **YOLOv11**. Compared to YOLOv8, YOLOv11 is significantly faster and more accurate, making it an excellent choice for implementing privacy features like object blurring. 
+
+#### Benefits of Using YOLOv11 for Object Blurring:
+1. **Privacy Protection:** Effectively obscures sensitive or identifiable information, ensuring compliance with data protection policies like GDPR.
+2. **Selective Focus:** Targets specific objects (e.g., faces) for blurring, while maintaining essential visual content for navigation and safety.
+3. **Real-Time Processing:** Executes object blurring efficiently in dynamic environments, making it suitable for instant privacy enhancements.
+
+Using YOLOv11, I trained and deployed a model on the **Go2 robot**. As shown in the **GIF below**, the robot can detect a person’s face, blur the region effectively, and display this blurred view on its screen. This functionality works as long as the person remains within the robot camera’s frame.
+
+![Object Blurring GIF](nl/faceblur.gif)
+
+
+### YOLOv11 Performance Comparison
+
+The chart below illustrates how YOLOv11 outperforms earlier models like YOLOv8 in terms of speed and accuracy. YOLOv11 introduces significant improvements, making it the preferred choice for real-time applications such as privacy-focused object detection and blurring.
+
+![YOLOv11 Performance Comparison](https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png)
+
+*Source: [Image Reference](https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png)*
+
+
+**Key Observations:**
+- **Speed:** YOLOv11 processes frames faster than YOLOv8, making it ideal for dynamic environments like retail stores where robots must respond quickly.  
+- **Accuracy:** YOLOv11 demonstrates higher detection accuracy compared to YOLOv8, ensuring reliable identification and processing of objects and faces.  
+- **Efficiency in Privacy Tasks:** With improved performance metrics, YOLOv11 ensures privacy protection features, such as object blurring, are executed without compromising system speed or functionality.
+
+Using YOLOv11, I trained and deployed a model on the **Go2 robot**. As shown in the **GIF below**, the robot effectively detects a person’s face, blurs the region, and displays this securely on its screen while ensuring smooth operation.  
+
+---
+
+### Generalization Across Cameras
+An important note: while this application was tested with the Go2 robot, it is designed to work with other cameras as well, including the **ZED 2i**. This flexibility ensures the solution can be applied across different hardware configurations, enhancing its usability in diverse environments.
+
+For more details about YOLOv11, refer to the [Ultralytics YOLO11 Documentation](https://docs.ultralytics.com/models/yolo11/).
+
+---
+
+
+
 ### Exploring Object Detection with ZED 2i Camera
 
 Before discussing use cases using Navigation2 in ROS2 Humble, I wanted to explore validation in a simulation environment by tackling a hands-on task. To do this, I worked with the industrial-level depth camera **ZED 2i** (refer to the image below).  
