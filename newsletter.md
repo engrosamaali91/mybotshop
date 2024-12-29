@@ -440,3 +440,47 @@ These insights and tools lay a strong foundation for creating robust object dete
 
 ---
 
+### Understanding Robot Decision-Making: Local and Global Planners
+
+Now that we have discussed the need to validate safety protocols and data protection policies—and identified each—it is time to explore what makes a robot autonomous. Specifically, we will dive into **how robots make decisions in different scenarios** and how planners influence these decisions during operation.
+
+Robots rely on two types of planners to navigate their environments: **local planners** and **global planners**. Each plays a distinct role in ensuring safe, efficient, and autonomous operation. Take a look at the table below to understand the key differences between them:
+
+| **Aspect**          | **Local Planner**                                                                 | **Global Planner**                                                                 |
+|---------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| **Scope**           | Handles short-term, real-time navigation and obstacle avoidance.                  | Plans long-term paths from the robot’s start point to its goal.                    |
+| **Focus**           | Dynamic obstacle handling and maintaining a smooth, collision-free trajectory.    | Optimizing the overall route based on the map, environment, and defined goals.     |
+| **Frequency**       | Operates at a higher frequency (e.g., 10 Hz) for real-time adjustments.           | Operates at a lower frequency (e.g., 1 Hz) to minimize computational overhead.     |
+| **Impact on Safety**| Ensures immediate responsiveness to nearby obstacles and path deviations.         | Avoids hazardous routes or areas that could compromise the robot's operation.      |
+| **Key Parameters**  | Velocity limits, inflation radius, yaw tolerance for precise control.             | Map cost layers, goal tolerance for efficient and safe long-term planning.         |
+
+Robots leverage these planners to make informed decisions, balancing safety, efficiency, and adaptability in diverse scenarios.
+
+---
+
+### Nav2 Global Planners and Local Controllers
+
+The Nav2 stack provides a robust framework for implementing local and global planners, each tailored to specific use cases and operational environments. The table below categorizes the available planners and controllers:
+
+| **Type**                  | **Name**                       | **Description**                                                                                                                      |
+|---------------------------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| **Global Planner**        | **NavFn Planner**              | Utilizes Dijkstra's algorithm to compute the shortest path on a costmap.                                                             |
+| **Global Planner**        | **Smac Planner**               | Offers different variants, including 2D and Hybrid-A* planners, suitable for various robot types and environments.                   |
+| **Global Planner**        | **Theta Planner**              | Computes paths that are more direct by allowing diagonal movements, reducing unnecessary turns.                                       |
+| **Local Controller**      | **DWB (Dynamic Window Approach)** | Evaluates a set of possible trajectories and selects the one that optimally balances progress toward the goal, speed, and obstacle avoidance. |
+| **Local Controller**      | **Regulated Pure Pursuit**     | Focuses on following the global path accurately, adjusting the robot's speed based on proximity to obstacles and path curvature.      |
+| **Local Controller**      | **MPPI (Model Predictive Path Integral)** | Uses a model predictive control approach to optimize control commands over a future horizon, considering the robot's dynamics and environmental constraints. |
+| **Local Controller**      | **Rotation Shim Controller**   | Handles in-place rotation behaviors, ensuring the robot can correctly orient itself before proceeding along the path.                 |
+
+---
+
+### Moving Forward
+In the following sections, we will explore how these planners influence robot behavior in specific scenarios:
+1. **Going in a Straight Line**  
+2. **Navigating Around Static Obstacles**  
+3. **Navigating Around Dynamic Obstacles**  
+
+For each scenario, we will analyze how different local and global planners affect safety, efficiency, and overall performance.
+
+
+---
