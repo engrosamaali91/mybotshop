@@ -484,3 +484,121 @@ For each scenario, we will analyze how different local and global planners affec
 
 
 ---
+
+
+
+### Relevant Parameters for Navigation Experiments
+
+These are the default paramters of Nav2 stack, in the following experiments these parameters will be tweaked for different scenarios, planners and controllers.
+
+| **Parameter Group**     | **Parameter Name**               | **Value**            | **Purpose/Description**                                                                                       |
+|--------------------------|-----------------------------------|-----------------------|---------------------------------------------------------------------------------------------------------------|
+| **AMCL Configuration**   | `use_sim_time`                   | `True`               | Ensures simulation time is used for synchronization.                                                          |
+|                          | `base_frame_id`                  | `base_footprint`     | Specifies the robot's base frame for localization.                                                            |
+|                          | `global_frame_id`                | `map`                | Specifies the global frame for localization.                                                                  |
+|                          | `max_particles`                  | `2000`               | Sets the maximum number of particles for localization accuracy.                                               |
+|                          | `min_particles`                  | `500`                | Sets the minimum number of particles for efficiency.                                                          |
+|                          | `transform_tolerance`            | `1.0`                | Ensures smooth transform updates.                                                                             |
+| **Controller Server**    | `controller_frequency`           | `20.0`               | Frequency at which local controllers compute control commands.                                                |
+|                          | `min_x_velocity_threshold`       | `0.001`              | Minimum allowable velocity along the x-axis.                                                                 |
+|                          | `FollowPath.max_vel_x`           | `0.26`               | Maximum linear velocity in the x-direction.                                                                   |
+|                          | `FollowPath.max_vel_theta`       | `1.0`                | Maximum angular velocity.                                                                                     |
+|                          | `FollowPath.sim_time`            | `1.7`                | Simulation time for trajectory evaluation.                                                                    |
+|                          | `FollowPath.xy_goal_tolerance`   | `0.25`               | Tolerance for reaching the goal in the x and y directions.                                                    |
+| **Costmap Parameters**   | `local_costmap.width`            | `3.0`                | Defines the width of the local costmap in meters.                                                             |
+|                          | `local_costmap.height`           | `3.0`                | Defines the height of the local costmap in meters.                                                            |
+|                          | `local_costmap.inflation_radius` | `0.55`               | Adds a buffer zone around obstacles for safety.                                                               |
+|                          | `global_costmap.inflation_radius`| `0.55`               | Adds a buffer zone in the global map for safety.                                                              |
+| **Planner Server**       | `GridBased.plugin`               | `nav2_navfn_planner/NavfnPlanner` | Uses the NavFn global planner for path computation.                                                          |
+|                          | `GridBased.tolerance`            | `0.5`                | Tolerance for reaching the goal in global planning.                                                           |
+|                          | `GridBased.allow_unknown`        | `true`               | Allows planning through unknown areas on the map.                                                             |
+| **Behavior Server**      | `cycle_frequency`                | `10.0`               | Frequency at which behaviors are checked.                                                                     |
+|                          | `transform_tolerance`            | `0.1`                | Ensures smooth transform updates for behaviors.                                                               |
+| **Velocity Smoother**    | `smoothing_frequency`            | `20.0`               | Frequency of smoothing velocity commands.                                                                     |
+|                          | `max_velocity`                   | `[0.26, 0.0, 1.0]`   | Maximum linear and angular velocities for the robot.                                                          |
+|                          | `max_accel`                      | `[2.5, 0.0, 3.2]`    | Maximum acceleration limits for the robot.                                                                    |
+| **General Parameters**   | `use_sim_time`                   | `True`               | Enables simulation time for all components.                                                                   |
+|                          | `robot_base_frame`               | `base_link`          | Specifies the base frame for the robot’s operations.                                                          |
+|                          | `global_frame`                   | `map`                | Specifies the global frame for navigation.                                                                    |
+
+---
+
+### Navigation Performance: Testing Different Planner and Controller Combinations
+
+This experiment evaluates the robot’s navigation capabilities using various combinations of global planners and local controllers from the Nav2 stack. Each combination was tested under three distinct scenarios:
+1. **Straight-Line Movement**
+2. **Navigating Static Obstacles**
+3. **Navigating Dynamic Obstacles**
+
+#### **Combination 1: NavFn Planner + DWB Local Planner**
+
+This configuration employs the **NavFn Planner** for global path planning and the **DWB Local Planner** for local trajectory adjustments.
+
+| **Component**      | **Plugin/Server**                  | **Type**            | **Description**                                                                 |
+|---------------------|------------------------------------|----------------------|---------------------------------------------------------------------------------|
+| **Planner Server**  | `nav2_navfn_planner/NavfnPlanner` | Global Planner       | Computes the shortest path from start to goal using Dijkstra's algorithm on a costmap. |
+| **Controller Server** | `dwb_core::DWBLocalPlanner`      | Local Controller     | Evaluates possible trajectories and selects the one that optimally balances progress, speed, and obstacle avoidance. |
+
+##### **Observations and Results**
+
+1. **Straight-Line Movement**  
+   - The robot adhered closely to the planned trajectory with minimal drift.
+   - Smooth motion was achieved by tuning parameters such as `max_velocity` and `yaw_goal_tolerance`.
+
+   ![Straight-Line Movement GIF](comb_1/straightline.gif)
+   > [!NOTE] The scene is speed forwarded and it does not reflect true speed i.e 0.26 m/s
+
+2. **Static Obstacles**  
+   - The robot slowed down at the junction and adjusted its speed.
+   - Trajectory adjustments were made by the robot and it remained on the global path.
+   - Minor path deviations were corrected by the local controller.
+
+   ![Static Obstacles GIF](comb_1/aroundstatic.gif)
+
+3. **Dynamic Obstacles**  
+   - The robot successfully responded to moving cube as a placeholder of a moving person but exhibited slight delays when encountering faster objects.
+   - The robot did not collide to moving cube
+   - The robot did not maintain safe distance likely due to suboptimal tuning of parameters such as inflation_radius, PathDist.scale, or obstacle_max_range in the local and global costmaps
+
+   ![Dynamic Obstacles GIF](comb_1/DynamicObstacles.gif)
+
+##### **Performance Summary**
+
+| **Scenario**              | **Performance**                                                 |
+|----------------------------|-----------------------------------------------------------------|
+| **Straight-Line Movement** | Smooth and precise navigation.                                 |
+| **Static Obstacles**       | Reliable obstacle avoidance with minor deviations.             |
+| **Dynamic Obstacles**      | Adequate responsiveness to slow-moving obstacles; improvement needed for fast-moving objects and maintaining safe distance  |
+
+##### **Future Considerations**
+- The **TEB Local Planner** could be explored for enhanced handling of dynamic obstacles.
+- The **Theta* Global Planner** may be utilized for more direct and efficient path generation.
+
+---
+
+#### **Combination 2: [Another Planner + Controller Combination]**
+
+(Repeat the structure for additional combinations tested.)
+
+
+
+
+
+----
+### Combination Suitability for Navigation Scenarios
+
+| **Global Planner + Local Controller** | **Straight-Line Movement** | **Static Obstacles** | **Dynamic Obstacles** |
+|---------------------------------------|----------------------------|-----------------------|-----------------------|
+| NavFn + DWB                           | ✔️                         | ✔️                    | ❌                    |
+| NavFn + TEB                           | ✔️                         | ✔️                    | ✔️                    |
+| Theta* + DWB                          | ✔️                         | ❌                    | ❌                    |
+| Smac (Hybrid-A*) + MPPI               | ✔️                         | ✔️                    | ✔️                    |
+| Smac (2D) + Regulated Pure Pursuit    | ✔️                         | ✔️                    | ❌                    |
+
+---
+
+### Key:
+- **✔️**: Suitable
+- **❌**: Not Suitable
+
+---
