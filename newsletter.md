@@ -761,17 +761,70 @@ The RQT graph illustrates how these components interact to ensure smooth and eff
 
 This interconnected structure ensures seamless communication and dynamic adaptability during navigation.
 
+
+---
+
+#### **Combination 3: NavFn Planner + Regulated Pure Pursuit Controller**
+
+### How Theta* Differs from Navfn Planner
+Theta* generates any-angle paths with smoother, more direct line segments, while Navfn is constrained to grid-based paths, resulting in more angular and less efficient routes.
+
+
+## Theta* + RPP: Observations and Insights
+
+### **Straight-Line Movement**
+In a straightforward scenario, the robot moved along a straight line as expected when the path was unobstructed. This behavior highlights the efficiency of the Theta* planner in generating direct, any-angle paths, reducing unnecessary turns, and optimizing the travel distance.
+
+![Straight Line Movement](comb_4/static.gif)
+
+---
+
+### **Static Environment**
+When multiple waypoints were provided, the robot recalculated the path dynamically instead of strictly following the given waypoints. It took a shortcut, reaching the goal faster than if it had adhered to the exact waypoints.
+
+**Reason:**  
+The Theta* planner is designed to optimize for the shortest and most efficient path between the start and goal. Waypoints, unless enforced as strict constraints, are treated as optional guides. The recalculated shortcut reflects the planner’s inherent focus on path optimization and reduced traversal time.
+
+![Static Environment Shortcut](comb_4/static.gif)
+
+---
+
+### **Dynamic Environment**
+In a dynamic setup, a walking person primitive was introduced as a moving obstacle:
+
+- **First Trial:**  
+  The robot collided with the moving person, likely due to limitations in the **RPP local planner** as we observed in the planner in conjunciton with Navfn planner, which did not react quickly enough to the dynamic change.
+
+- **Second Trial:**  
+  After the person moved aside, the robot successfully stopped, recalculated a shorter path, and reached the goal.
+
+![Dynamic Successful Trial 2](comb_4/dynamic.gif)
+
+**Reason:**  
+This outcome underscores the adaptability of Theta* + RPP (Reactive Path Planning). The planner dynamically recalculated the path based on real-time updates, showcasing its ability to handle dynamic obstacles effectively. The successful adjustment in the second trial highlights the importance of robust integration between the global and local planning layers.
+
+---
+
+
+| **Feature**               | **Performance**                                                                                  | **Comments**                                                                                             |
+|---------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **Straight-Line Movement** | Smooth and efficient direct paths.                                                            | Theta* generates optimal, any-angle paths, making it ideal for open and unconstrained environments.      |
+| **Static Obstacles**       | Dynamically recalculates efficient paths.                                                     | Bypasses unnecessary waypoints to optimize travel time and distance in static environments.              |
+| **Dynamic Obstacles**      | Relies on the local planner for handling dynamic changes effectively.                          | RPP’s responsiveness impacts success; improvements in local planner integration could enhance reliability. |
+
+These observations illustrate the strengths of Theta* + RPP in both static and dynamic scenarios. While the planner excels at optimizing paths, ensuring a robust local planner is critical for managing dynamic obstacles in real-world environments. 
+
 ---
 
 ### Combination Suitability for Navigation Scenarios
 
 | **Global Planner + Local Controller** | **Straight-Line Movement** | **Static Obstacles** | **Dynamic Obstacles** |
-|---------------------------------------|----------------------------|-----------------------|-----------------------|
-| NavFn + DWB                           | ✔️                         | ✔️                    | ❌                    |
-| NavFn + MPPI                          | ✔️                         | ✔️                    | ✔️                    |
-| NavFn + Regulated Pure Pursiot        | ✔️                         | ❌                   | ❌                    |
-| Smac (Hybrid-A*) + MPPI               | ✔️                         | ✔️                    | ✔️                    |
-| Smac (2D) + Regulated Pure Pursuit    | ✔️                         | ✔️                    | ❌                    |
+|---------------------------------------|----------------------------|-----------------------|----------------------|
+| NavFn + DWB                           | ✔️                         | ✔️                    | ❌                     |
+| NavFn + MPPI                          | ✔️                         | ✔️                    | ✔️                      |
+| NavFn + RPP                           | ✔️                         | ❌                   | ❌                     | 
+| Theta* + RPP                          | ✔️                         | ✔️                    | ❌                     |
+| Smac (2D) + Regulated Pure Pursuit    | ✔️                         | ✔️                    | ❌                     |
 
 ----
 
