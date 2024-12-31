@@ -463,7 +463,7 @@ Robots leverage these planners to make informed decisions, balancing safety, eff
 The Nav2 stack provides a robust framework for implementing local and global planners, each tailored to specific use cases and operational environments. The table below categorizes the available planners and controllers:
 
 | **Type**                  | **Name**                       | **Description**                                                                                                                      |
-|---------------------------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+|---------------------------|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | **Global Planner**        | **NavFn Planner**              | Utilizes Dijkstra's algorithm to compute the shortest path on a costmap.                                                             |
 | **Global Planner**        | **Smac Planner**               | Offers different variants, including 2D and Hybrid-A* planners, suitable for various robot types and environments.                   |
 | **Global Planner**        | **Theta Planner**              | Computes paths that are more direct by allowing diagonal movements, reducing unnecessary turns.                                       |
@@ -664,13 +664,94 @@ The combination of **NavFn Planner** and **MPPI Controller** provided robust per
 
 
 ----
+
+### Navigation Performance: Testing Different Planner and Controller Combinations
+
+#### **Combination 3: NavFn Planner + Regulated Pure Pursuit Controller**
+
+This configuration utilizes the **NavFn Planner** for global path planning and the **Regulated Pure Pursuit Controller** for local trajectory adjustments. While this combination is highly efficient for straight-line movements, its performance diminishes when navigating through close proximities or dynamic environments.
+
+---
+
+#### **Why Regulated Pure Pursuit Controller is a Good Choice**
+
+The **Regulated Pure Pursuit Controller** is known for its simplicity and reliability in following global paths, particularly in open environments. It is designed to scale its velocity based on proximity to obstacles and path curvature, ensuring smooth and precise motion.
+
+**Key Advantages**:
+- **Ideal for Straight-Line Movements**: Ensures smooth and predictable navigation without significant path deviations.
+- **Velocity Regulation**: Dynamically adjusts speed to maintain safety when approaching obstacles.
+- **Ease of Tuning**: Fewer parameters compared to more complex controllers, simplifying configuration.
+
+---
+
+#### **Relevant Parameters for Regulated Pure Pursuit Controller**
+
+| **Parameter**                          | **Value**        | **Description**                                                                 |
+|-----------------------------------------|------------------|---------------------------------------------------------------------------------|
+| `desired_linear_vel`                   | `0.5`            | Target velocity for the robot's linear motion.                                 |
+| `lookahead_dist`                       | `0.6`            | Distance ahead of the robot for trajectory adjustments.                        |
+| `min_lookahead_dist`                   | `0.3`            | Minimum distance for trajectory adjustments.                                   |
+| `max_lookahead_dist`                   | `0.9`            | Maximum distance for trajectory adjustments.                                   |
+| `rotate_to_heading_angular_vel`        | `1.8`            | Angular velocity for orienting toward the path heading.                        |
+| `use_velocity_scaled_lookahead_dist`   | `false`          | Disables scaling of lookahead distance based on velocity.                      |
+| `use_collision_detection`              | `true`           | Enables obstacle detection for safer navigation.                               |
+| `max_allowed_time_to_collision_up_to_carrot` | `1.0`        | Maximum allowed time to potential collisions along the path.                   |
+| `min_approach_linear_velocity`         | `0.05`           | Minimum velocity when approaching a goal or obstacle.                          |
+| `transform_tolerance`                  | `0.1`            | Tolerance for transform lookups to ensure stability in real-time adjustments.  |
+
+---
+
+#### **Testing Scenarios and Observations**
+
+The robot's performance was evaluated under three scenarios using this combination:
+
+1. **Straight-Line Movement**  
+   - The robot navigated smoothly and efficiently, adhering to the global path without significant deviations.
+   - Velocity regulation ensured stable and precise motion.
+
+   ![Straight-Line Movement GIF](comb_3/straight.gif)
+
+2. **Navigating Static Obstacles**  
+   - Performance was suboptimal, particularly when passing through close gaps.
+   - The robot struggled with efficiency compared to other combinations like NavFn + DWB and NavFn + MPPI.
+
+   ![Static Obstacles GIF](comb_3/static2.gif)
+
+3. **Navigating Dynamic Obstacles**  
+   - The robot managed to replan and avoid moving obstacles, but the response time was slower than other controllers.
+   - While it successfully reached the goal pose, the delay in path adjustments indicated limited efficiency in dynamic scenarios.
+
+   ![Dynamic Obstacles GIF](comb_3/Dynamic.gif)
+
+---
+
+#### **Performance Summary**
+
+| **Scenario**              | **Performance**                                                                 |
+|----------------------------|---------------------------------------------------------------------------------|
+| **Straight-Line Movement** | Smooth and precise navigation, ideal for open spaces.                         |
+| **Static Obstacles**       | Struggled with close proximities, less efficient compared to other combinations.|
+| **Dynamic Obstacles**      | Slow in replanning and path adjustments, though able to reach the goal.        |
+
+---
+
+#### **Conclusion**
+
+The combination of **NavFn Planner** and **Regulated Pure Pursuit Controller** is well-suited for open environments with minimal obstacles. However, its limitations become evident in more complex scenarios, such as navigating through tight spaces or reacting to dynamic obstacles.
+
+**Future Improvements**:
+- Consider using **DWB** or **MPPI** for environments with close proximities or high dynamic activity.
+- Fine-tune parameters like `lookahead_dist` and enable **velocity-scaled lookahead** for more responsive adjustments.
+
+---
+
 ### Combination Suitability for Navigation Scenarios
 
 | **Global Planner + Local Controller** | **Straight-Line Movement** | **Static Obstacles** | **Dynamic Obstacles** |
 |---------------------------------------|----------------------------|-----------------------|-----------------------|
 | NavFn + DWB                           | ✔️                         | ✔️                    | ❌                    |
 | NavFn + MPPI                          | ✔️                         | ✔️                    | ✔️                    |
-| Theta* + DWB                          | ✔️                         | ❌                    | ❌                    |
+| NavFn + Regulated Pure Pursiot        | ✔️                         | ❌                    | ❌                    |
 | Smac (Hybrid-A*) + MPPI               | ✔️                         | ✔️                    | ✔️                    |
 | Smac (2D) + Regulated Pure Pursuit    | ✔️                         | ✔️                    | ❌                    |
 
