@@ -835,3 +835,8 @@ These observations illustrate the strengths of Theta* + RPP in both static and d
 ---
 
 
+> [!IMPORTANT]
+> Controllers perform differently based on drive types (e.g., differential, Ackermann), impacting navigation results. Proper pairing and tuning are crucial for optimal performance. 
+
+> [!NOTE]
+> Different drives may give varying results.
