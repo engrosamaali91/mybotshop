@@ -745,13 +745,31 @@ The combination of **NavFn Planner** and **Regulated Pure Pursuit Controller** i
 
 ---
 
+
+### Interconnected Nodes in Nav2 Stack
+
+To better understand the communication between various components of the Nav2 stack, here’s the **RQT Graph** visualization of interconnected nodes. This includes key nodes like the **local cost map**, **global cost map**, **controller server**, **planner server**, and **behavior server**.
+
+![RQT Graph Visualization](comb_3/rosgraph.png)
+
+**Note**:  
+The RQT graph illustrates how these components interact to ensure smooth and efficient navigation. Each node plays a critical role:
+- **Planner Server**: Computes the global path.
+- **Controller Server**: Adjusts the local trajectory for real-time obstacle avoidance.
+- **Behavior Server**: Manages higher-level behaviors like spinning, backing up, and driving on heading.
+- **Cost Maps**: Provide the environmental representation for planning and obstacle avoidance.
+
+This interconnected structure ensures seamless communication and dynamic adaptability during navigation.
+
+---
+
 ### Combination Suitability for Navigation Scenarios
 
 | **Global Planner + Local Controller** | **Straight-Line Movement** | **Static Obstacles** | **Dynamic Obstacles** |
 |---------------------------------------|----------------------------|-----------------------|-----------------------|
 | NavFn + DWB                           | ✔️                         | ✔️                    | ❌                    |
 | NavFn + MPPI                          | ✔️                         | ✔️                    | ✔️                    |
-| NavFn + Regulated Pure Pursiot        | ✔️                         | ❌                    | ❌                    |
+| NavFn + Regulated Pure Pursiot        | ✔️                         | ❌                   | ❌                    |
 | Smac (Hybrid-A*) + MPPI               | ✔️                         | ✔️                    | ✔️                    |
 | Smac (2D) + Regulated Pure Pursuit    | ✔️                         | ✔️                    | ❌                    |
 
@@ -764,4 +782,3 @@ The combination of **NavFn Planner** and **Regulated Pure Pursuit Controller** i
 ---
 
 
-Hello world
