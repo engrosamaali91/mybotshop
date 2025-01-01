@@ -775,7 +775,7 @@ Theta* generates any-angle paths with smoother, more direct line segments, while
 ### **Straight-Line Movement**
 In a straightforward scenario, the robot moved along a straight line as expected when the path was unobstructed. This behavior highlights the efficiency of the Theta* planner in generating direct, any-angle paths, reducing unnecessary turns, and optimizing the travel distance.
 
-![Straight Line Movement](comb_4/static.gif)
+![Straight Line Movement](comb_4/straight.gif)
 
 ---
 
