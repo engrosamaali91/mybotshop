@@ -873,11 +873,11 @@ This detailed analysis highlights the strengths and limitations of this advanced
 
 | **Global Planner + Local Controller** | **Straight-Line Movement** | **Static Obstacles** | **Dynamic Obstacles** | **Obstacle Clearance**     | **Dynamic Obstacle Handling** |
 |---------------------------------------|----------------------------|-----------------------|-----------------------|----------------------------|--------------------------------|
-| **NavFn + DWB**                       | ✔️                         | ✔️                    | ❌                    | Good                  | Moderate responsiveness        |
-| **NavFn + MPPI**                      | ✔️                         | ✔️                    | ✔️                    | Excellent                  | Highly responsive              |
-| **NavFn + RPP**                       | ✔️                         | ❌                   | ❌                    | Average (struggles in gaps)| Slow                           | 
-| **Theta_* + RPP**                     | ✔️                         | ✔️                    | ❌                    | Excellent                    | Slow                           |
-| **Smac Planner Hybrid + MPPI**        | ✔️                         | ✔️                    | ❌                    | Bad                       | Moderate responsiveness        |
+| **NavFn + DWB**                       | ✅                          | ✅                     | ❌                    | Good                  | Moderate responsiveness        |
+| **NavFn + MPPI**                      | ✅                          | ✅                     | ✅                     | Excellent                  | Highly responsive              |
+| **NavFn + RPP**                       | ✅                          | ❌                   | ❌                    | Average (struggles in gaps)| Slow                           | 
+| **Theta_* + RPP**                     | ✅                          | ✅                     | ❌                    | Excellent                    | Slow                           |
+| **Smac Planner Hybrid + MPPI**        | ✅                          | ✅                     | ❌                    | Bad                       | Moderate responsiveness        |
 
 ---
 
@@ -902,11 +902,11 @@ This detailed analysis highlights the strengths and limitations of this advanced
 
 | **Planner Name**           | **Circular Differential** | **Circular Omnidirectional** | **Non-Circular Ackermann** | **Non-Circular Legged** | **Non-Circular Differential/Omnidirectional** | **Arbitrary** |
 |-----------------------------|---------------------------|------------------------------|----------------------------|-------------------------|----------------------------------------------|---------------|
-| **NavFn Planner**          | ✔️                        | ✔️                           | ❌                         | ❌                      | ❌                                           | ❌            |
-| **Smac Planner 2D**         | ✔️                        | ✔️                           | ❌                         | ❌                      | ❌                                           | ❌            |
-| **Theta* Planner**          | ✔️                        | ✔️                           | ❌                         | ❌                      | ❌                                           | ❌            |
-| **Smac Hybrid-A* Planner**  | ✔️                        | ✔️                           | ✔️                         | ✔️                      | ✔️                                           | ❌            |
-| **Smac Lattice Planner**    | ❌                        | ❌                           | ✔️                         | ✔️                      | ✔️                                           | ✔️            |
+| **NavFn Planner**          | ✅                         | ✅                            | ❌                         | ❌                      | ❌                                           | ❌            |
+| **Smac Planner 2D**         | ✅                         | ✅                            | ❌                         | ❌                      | ❌                                           | ❌            |
+| **Theta* Planner**          | ✅                        | ✅                            | ❌                         | ❌                      | ❌                                           | ❌            |
+| **Smac Hybrid-A* Planner**  | ✅                         | ✅                            | ✅                          | ✅                       | ✅                                            | ❌            |
+| **Smac Lattice Planner**    | ❌                        | ❌                           | ✅                          | ✅                       | ✅                                            | ✅             |
 
 ---
 
@@ -926,11 +926,11 @@ This table provides a clear summary of which planner is best suited for each typ
 
 | **Controller Name**        | **Differential** | **Omnidirectional** | **Ackermann** | **Legged** | **Primary Task**                |
 |-----------------------------|------------------|----------------------|---------------|------------|----------------------------------|
-| **DWB Controller**         | ✔️               | ✔️                   | ❌            | ❌         | Dynamic obstacle avoidance       |
-| **MPPI Controller**        | ✔️               | ✔️                   | ✔️            | ✔️         | Dynamic obstacle avoidance       |
-| **RPP Controller**         | ✔️               | ❌                   | ✔️            | ✔️         | Exact path following             |
-| **Rotation Shim**          | ✔️               | ✔️                   | ❌            | ❌         | Rotate to rough heading          |
-| **VP Controller**          | ✔️               | ❌                   | ✔️            | ✔️         | High-speed path tracking         |
+| **DWB Controller**         | ✅                | ✅                    | ❌            | ❌         | Dynamic obstacle avoidance       |
+| **MPPI Controller**        | ✅                | ✅                   | ✅             | ✅          | Dynamic obstacle avoidance       |
+| **RPP Controller**         | ✅                | ❌                   | ✅             | ✅          | Exact path following             |
+| **Rotation Shim**          | ✅               | ✅                    | ❌            | ❌         | Rotate to rough heading          |
+| **VP Controller**          | ✅               | ❌                   | ✅             | ✅          | High-speed path tracking         |
 
 ---
 
