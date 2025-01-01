@@ -896,3 +896,48 @@ This detailed analysis highlights the strengths and limitations of this advanced
 
 > [!NOTE]
 > Different drives may give varying results.
+
+
+### Planner Suitability for Different Robot Types
+
+| **Planner Name**           | **Circular Differential** | **Circular Omnidirectional** | **Non-Circular Ackermann** | **Non-Circular Legged** | **Non-Circular Differential/Omnidirectional** | **Arbitrary** |
+|-----------------------------|---------------------------|------------------------------|----------------------------|-------------------------|----------------------------------------------|---------------|
+| **NavFn Planner**          | ✔️                        | ✔️                           | ❌                         | ❌                      | ❌                                           | ❌            |
+| **Smac Planner 2D**         | ✔️                        | ✔️                           | ❌                         | ❌                      | ❌                                           | ❌            |
+| **Theta* Planner**          | ✔️                        | ✔️                           | ❌                         | ❌                      | ❌                                           | ❌            |
+| **Smac Hybrid-A* Planner**  | ✔️                        | ✔️                           | ✔️                         | ✔️                      | ✔️                                           | ❌            |
+| **Smac Lattice Planner**    | ❌                        | ❌                           | ✔️                         | ✔️                      | ✔️                                           | ✔️            |
+
+---
+
+### Key:
+- **✔️**: Suitable for this type of robot.
+- **❌**: Not suitable for this type of robot.
+
+---
+
+This table provides a clear summary of which planner is best suited for each type of robot, helping users make informed decisions based on their robot's design and operational needs.
+
+
+> [!NOTE]
+> Not all controllers are suitable for all robot tasks, it depends on the type of robot as well as task being performed.
+
+### Controller Suitability for Different Robot Types and Tasks
+
+| **Controller Name**        | **Differential** | **Omnidirectional** | **Ackermann** | **Legged** | **Primary Task**                |
+|-----------------------------|------------------|----------------------|---------------|------------|----------------------------------|
+| **DWB Controller**         | ✔️               | ✔️                   | ❌            | ❌         | Dynamic obstacle avoidance       |
+| **MPPI Controller**        | ✔️               | ✔️                   | ✔️            | ✔️         | Dynamic obstacle avoidance       |
+| **RPP Controller**         | ✔️               | ❌                   | ✔️            | ✔️         | Exact path following             |
+| **Rotation Shim**          | ✔️               | ✔️                   | ❌            | ❌         | Rotate to rough heading          |
+| **VP Controller**          | ✔️               | ❌                   | ✔️            | ✔️         | High-speed path tracking         |
+
+---
+
+### Key:
+- **✔️**: Suitable for this type of robot.
+- **❌**: Not suitable for this type of robot.
+
+---
+
+This table offers a clear summary of controller suitability based on robot type and primary tasks, helping users make informed decisions about their controller configuration.
