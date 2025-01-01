@@ -574,13 +574,6 @@ This configuration employs the **NavFn Planner** for global path planning and th
 - The **TEB Local Planner** could be explored for enhanced handling of dynamic obstacles.
 - The **Theta* Global Planner** may be utilized for more direct and efficient path generation.
 
----
-
-#### **Combination 2: [Another Planner + Controller Combination]**
-
-(Repeat the structure for additional combinations tested.)
-
-
 ----
 
 ### Navigation Performance: Testing Different Planner and Controller Combinations
@@ -764,7 +757,7 @@ This interconnected structure ensures seamless communication and dynamic adaptab
 
 ---
 
-#### **Combination 3: NavFn Planner + Regulated Pure Pursuit Controller**
+#### **Combination 4: Theta* + Regulated Pure Pursuit Controller**
 
 ### How Theta* Differs from Navfn Planner
 Theta* generates any-angle paths with smoother, more direct line segments, while Navfn is constrained to grid-based paths, resulting in more angular and less efficient routes.
@@ -817,8 +810,7 @@ These observations illustrate the strengths of Theta* + RPP in both static and d
 
 ---
 
-
-#### **Combination 5: NavFn Planner + Regulated Pure Pursuit Controller**
+#### **Combination 5: Smac Planner + MPPI**
 
 
 ### Navigation Performance: Testing Smac Planner + MPPI Controller
