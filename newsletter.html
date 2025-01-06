@@ -286,6 +286,153 @@
                     </tr>
                 </tbody>
             </table>
+
+
+
+            <h2>Data Protection Policies: Ensuring Privacy in Retail Robot Operations</h2>
+            <p>After discussing and identifying some of the key safety protocols—an integral part of any retail store environment—we now focus on <strong>data protection policies</strong>. Privacy is a critical concern, as most people would want their personal information, including facial data, to remain secure. At the same time, detection using cameras is an essential aspect of ensuring the safety and protection of people around robots.</p>
+            <p>To address this challenge, a solution must allow robots to detect individuals in a retail store environment <strong>without compromising their privacy</strong>. For example, a robot could detect a person’s presence, blur their face region, and display this blurred face on the robot's interface. This ensures the person's identity is protected while the robot continues to navigate safely, avoiding possible collisions.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Protocol Name</th>
+                        <th>Summary</th>
+                        <th>Relevance</th>
+                        <th>Future Work/Gaps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>IEEE 7000</strong></td>
+                        <td>Ethical guidelines for system design, focusing on privacy, transparency, and data protection in systems interacting with humans.</td>
+                        <td>Guides ethical implementation of robotics, ensuring privacy, transparency, and data management where robots interact with people, especially in retail.</td>
+                        <td>Ethical principles need wider adoption in robotic design, especially in automated decision-making and transparency in human-robot interactions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GDPR</strong></td>
+                        <td>Regulates data protection and privacy in the EU, providing guidelines for lawful data processing, ensuring consent, transparency, and the right to erasure.</td>
+                        <td>Ensures personal data collected during person detection in retail is handled securely and compliant with privacy regulations.</td>
+                        <td>Further refinement is needed in automated anonymization, real-time monitoring, and adapting to evolving privacy and security requirements.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Leveraging Ultralytics YOLO11 for Privacy Protection</h3>
+            <p>During the exploration of data protection policies, I utilized the latest release from Ultralytics: <strong>YOLOv11</strong>. Compared to YOLOv8, YOLOv11 is significantly faster and more accurate, making it an excellent choice for implementing privacy features like object blurring.</p>
+
+            <h4>Benefits of Using YOLOv11 for Object Blurring:</h4>
+            <ul>
+                <li><strong>Privacy Protection:</strong> Effectively obscures sensitive or identifiable information, ensuring compliance with data protection policies like GDPR.</li>
+                <li><strong>Selective Focus:</strong> Targets specific objects (e.g., faces) for blurring, while maintaining essential visual content for navigation and safety.</li>
+                <li><strong>Real-Time Processing:</strong> Executes object blurring efficiently in dynamic environments, making it suitable for instant privacy enhancements.</li>
+            </ul>
+            <p>Using YOLOv11, I trained and deployed a model on the <strong>Go2 robot</strong>. As shown in the <strong>GIF below</strong>, the robot can detect a person’s face, blur the region effectively, and display this blurred view on its screen. This functionality works as long as the person remains within the robot camera’s frame.</p>
+            <img src="nl/faceblur.gif" alt="Object Blurring GIF">
+
+            <h3>YOLOv11 Performance Comparison</h3>
+            <p>The chart below illustrates how YOLOv11 outperforms earlier models like YOLOv8 in terms of speed and accuracy. YOLOv11 introduces significant improvements, making it the preferred choice for real-time applications such as privacy-focused object detection and blurring.</p>
+            <img src="https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png" alt="YOLOv11 Performance Comparison">
+            <p><em>Source: <a href="https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png">Image Reference</a></em></p>
+
+            <h4>Key Observations:</h4>
+            <ul>
+                <li><strong>Speed:</strong> YOLOv11 processes frames faster than YOLOv8, making it ideal for dynamic environments like retail stores where robots must respond quickly.</li>
+                <li><strong>Accuracy:</strong> YOLOv11 demonstrates higher detection accuracy compared to YOLOv8, ensuring reliable identification and processing of objects and faces.</li>
+                <li><strong>Efficiency in Privacy Tasks:</strong> With improved performance metrics, YOLOv11 ensures privacy protection features, such as object blurring, are executed without compromising system speed or functionality.</li>
+            </ul>
+
+            <h3>Generalization Across Cameras</h3>
+            <p>An important note: while this application was tested with the Go2 robot, it is designed to work with other cameras as well, including the <strong>ZED 2i</strong>. This flexibility ensures the solution can be applied across different hardware configurations, enhancing its usability in diverse environments.</p>
+            <p>For more details about YOLOv11, refer to the <a href="https://docs.ultralytics.com/models/yolo11/">Ultralytics YOLO11 Documentation</a>.</p>
+
+            <h3>Exploring Object Detection with ZED 2i Camera</h3>
+            <p>Before discussing use cases using Navigation2 in ROS2 Humble, I wanted to explore validation in a simulation environment by tackling a hands-on task. To do this, I worked with the industrial-level depth camera <strong>ZED 2i</strong> (refer to the image below).</p>
+            <p>Depth cameras are a crucial component of any robot. Acting as the robot's eyes, they enable the robot to not only see objects but also infer their distance from the camera. Unlike standard fisheye cameras, depth cameras like the ZED 2i allow robots to estimate the 3D pose of objects relative to the camera, which is vital for tasks such as navigation and object interaction.</p>
+
+            <h4>Why Depth Cameras Matter</h4>
+            <ul>
+                <li><strong>Object Localization:</strong> Depth cameras help estimate the location of objects in the environment while the robot is moving.</li>
+                <li><strong>Human-Robot Interaction:</strong> They enable robots to classify objects and humans, improving situational awareness in dynamic environments like retail stores.</li>
+                <li><strong>Pose Estimation:</strong> The 3D pose of objects can be calculated, helping robots identify the orientation and position of objects.</li>
+            </ul>
+            <p>As shown in the <strong>GIF below</strong>, the robot classified a handbag with approximately 84% accuracy, demonstrating the capability to detect and classify objects. This was achieved using a trained YOLOv8 model, with data preprocessing and augmentation performed using <strong>RoboFlow</strong>.</p>
+            <img src="nl/Object_detection_wrt_camera_frame.gif" alt="3D Object Pose Detection">
+
+            <h3>Why I Chose YOLOv8</h3>
+            <p>I selected the YOLOv8 model for this task because of its flexibility and support for multiple tasks such as detection, classification, and segmentation. Below is a comparison of its key features, which influenced my decision:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>YOLOv8</th>
+                        <th>YOLOv5</th>
+                        <th>YOLOv4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Architecture</strong></td>
+                        <td>Unified Detection, Segmentation, Classification</td>
+                        <td>Separate models</td>
+                        <td>Separate models</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Speed</strong></td>
+                        <td>Faster than YOLOv5</td>
+                        <td>Moderate</td>
+                        <td>Slower</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accuracy</strong></td>
+                        <td>Improved</td>
+                        <td>High</td>
+                        <td>Moderate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supported Modes</strong></td>
+                        <td>Detection, Classification, Segmentation</td>
+                        <td>Detection, Classification</td>
+                        <td>Detection only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ease of Use</strong></td>
+                        <td>Intuitive</td>
+                        <td>Intuitive</td>
+                        <td>Moderate</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>For more details, refer to the <a href="https://docs.ultralytics.com/models/yolov8/">YOLOv8 documentation</a>.</p>
+            <p>Additionally, the comparison image below illustrates YOLOv8’s performance metrics relative to previous versions, highlighting its superior speed and accuracy.</p>
+            <img src="https://github.com/ultralytics/docs/releases/download/0/yolov8-comparison-plots.avif" alt="YOLOv8 Comparison">
+            <p><em>Source: <a href="https://docs.ultralytics.com/models/yolov8/">YOLOv8 Documentation</a></em></p>
+
+            <h3>Why I Chose ZED 2i</h3>
+            <p>The <strong>ZED 2i</strong> camera was an ideal choice for this task due to its built-in <strong>body tracking feature</strong>. In dynamic environments like retail stores, where humans are continuously moving, it is critical to track human bodies effectively. The ZED 2i’s advanced capabilities, such as tracking 18 key points of the human body, enable precise and reliable tracking.</p>
+            <p><em>Refer to the <a href="https://www.stereolabs.com/docs/body-tracking/">ZED 2i Body Tracking Documentation</a> for more details.</em></p>
+            <p>Here’s a visual representation of the 18 key points tracked by the ZED 2i camera:</p>
+            <img src="https://docs.stereolabs.com/body-tracking/images/keypoints_body18.png" alt="Body Tracking Key Points">
+            <p>Below is a <strong>GIF of a scene showcasing keypoints being detected in real-time</strong> using the ZED 2i camera:</p>
+            <img src="nl/bodytracking.gif" alt="Keypoints Detection GIF">
+            <p>The GIF illustrates how the ZED 2i camera accurately tracks and detects human movements by identifying body keypoints, ensuring seamless performance in dynamic environments like retail stores.</p>
+            <p>Another compelling reason for experimenting with the ZED 2i camera is its <strong>availability within Isaac Sim</strong>. NVIDIA Isaac Sim supports the ZED 2i camera as a virtual sensor, allowing developers to test and validate robotics applications in high-fidelity simulated environments before deploying them in real-world scenarios.</p>
+            <img src="https://docs.stereolabs.com/isaac-sim/images/ZED_in_isaac_sim.jpg" alt="zed2i in isaac sim">
+            <p><em>Image Source: <a href="https://www.stereolabs.com/docs/isaac-sim">ZED2i Documentation</a></em></p>
+
+
+
+
+            <h3>Outcome and Applications</h3>
+            <p>The combination of the ZED 2i camera and YOLOv8 allowed the robot to:</p>
+            <ul>
+                <li><strong>Classify Objects with High Accuracy:</strong> For example, identifying handbags, as shown in the GIF.
+                <li><strong>Human Movements:</strong> The built-in body tracking feature ensured accurate tracking of humans, which is crucial in environments like retail stores.  
+                <li><strong>Augmented Data:</strong></li>  Using RoboFlow for data preprocessing and augmentation streamlined the training process and improved detection accuracy.
+                    
+            </ul>    
+                These insights and tools lay a strong foundation for creating robust object detection systems, especially in settings where robots need to navigate and interact with complex environments efficiently.</li>
+
         </div>
     </div>
  </body>
