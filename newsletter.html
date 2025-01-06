@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+    Digital Twin-Driven Safety Protocol Development for HRI in German Retail Stores
+  </title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
+    .header, .footer {
+        background: #333;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+    }
+    .main-content {
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    h1, h3, h4 {
+        color: #34a734;
+    }
+    .note, .warning, .important {
+        background: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        padding: 10px;
+        margin: 10px 0;
+    }
+    .warning {
+        background: #ffebee;
+        border-left: 6px solid #f44336;
+    }
+    .important {
+        background: #fff3e0;
+        border-left: 6px solid #ff9800;
+    }
+    code {
+        background: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+    pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow: auto;
+    }
+    a {
+        color: #2196F3;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+  </style>
+ </head>
+
+ <body>
+    <div class="container">
+        <div class="main-content">
+            <h1>Digital Twin-Driven Safety Protocol Development for HRI in German Retail Stores</h1>
+            <img src="nl/workflow.jpg" alt="Workflow">
+            <p>Autonomous mobile robots are becoming increasingly intelligent through the integration of Artificial Intelligence (AI). These robots are now capable of making real-time decisions, such as determining optimal paths, navigating around obstacles, and dynamically choosing new routes. With advanced sensors like LiDAR and cameras, robots can detect and respond to both stationary and moving objects, ensuring the safety of people, themselves, and the surrounding environment.</p>
+            <p>However, to operate safely and effectively, robots must adhere to strict safety protocols and comply with data protection regulations when interacting with humans. This is crucial to minimize risks, especially when deploying autonomous robots in settings such as retail stores or warehouses. Without thorough testing, there is a risk of accidents, injuries, or inventory damage. As a result, authorities have established safety regulations to ensure that robots are designed with compliance in mind.</p>
+            <p>To address these challenges, MYBOTSHOP is investing significant time and resources into training students to test and validate safety protocols and data protection policies for both new and existing robots within simulation environments. These simulated tests ensure that robots can be safely deployed in real-world scenarios without jeopardizing human lives or privacy.</p>
+
+            <h2>Comparison of Simulation Environments</h2>
+            <img src="nl/SE.jpg" alt="Simulation Environments">
+            <p>Testing autonomous robots in simulation environments is essential to evaluate their performance under both expected and unexpected conditions. This raises an important question: <strong>Which simulation environment is best for testing diverse scenarios?</strong></p>
+            <p>To answer this, let’s compare three prominent simulation platforms: <strong>Gazebo Classic</strong>, <strong>Gazebo Fortress</strong>, and <strong>NVIDIA Isaac Sim</strong> (developed by Omniverse). Each platform has unique strengths and limitations, as highlighted in the <strong>comparison chart above</strong>.</p>
+            <ul>
+                <li><strong>Gazebo Classic</strong> offers ease of environment setup and a fast simulation speed but lacks support for high-definition simulations and crowd animation. It is a reliable choice for basic ROS2 integration without requiring high-end hardware.</li>
+                <li><strong>Gazebo Fortress</strong> improves on crowd animation and introduces high-definition simulation capabilities. However, it is more resource-intensive and less user-friendly in terms of built-in plugins.</li>
+                <li><strong>NVIDIA Isaac Sim</strong> stands out for its high-fidelity simulation and reinforcement learning support, making it ideal for advanced robotics applications. However, it demands high processing power and has a steeper learning curve for ROS2 integration.</li>
+            </ul>
+            <p>As illustrated in the <strong>image above</strong>, Gazebo Classic excels in simplicity, while NVIDIA Isaac Sim leads in advanced simulation capabilities. Choosing the right platform depends on your project's specific requirements, such as simulation fidelity or hardware limitations.</p>
+
+            <h3>Observations on NVIDIA Isaac Sim for Simulation</h3>
+            <p>NVIDIA Isaac Sim is a cutting-edge simulation platform that serves dual purposes: simulation testing and reinforcement learning. In Omni Isaac Gym, robots can be trained effectively for complex tasks. However, while Isaac Sim offers many advantages, as highlighted in the comparison table, it may not always be the best solution for simulations as a test bench.</p>
+
+            <h4>Pros of Isaac Sim:</h4>
+            <ul>
+                <li>High-definition, realistic 3D scenes for immersive simulations.</li>
+                <li>Integration with reinforcement learning frameworks for advanced robotic training.</li>
+                <li>Built-in examples like Nova Carter robot navigation in warehouse environments.</li>
+            </ul>
+
+            <h4>Cons of Isaac Sim:</h4>
+            <ul>
+                <li>Requires high processing power, leading to potential lag in real-time applications.</li>
+                <li>Challenges in adapting custom robots and environments, especially with configuring TF for parent-child relations.</li>
+                <li>Slower map updates in RViz2, making real-time obstacle detection less reliable.</li>
+            </ul>
+
+            <h3>Real-World Test: Navigation in a Warehouse Environment</h3>
+            <img src="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" alt="NOVA Carter Robot">
+            <p><em>[Figure 1: NOVA Carter Robot navigating a warehouse environment.]</em></p>
+            <p>In our observations, we tested the <strong>Nova Carter robot</strong>, as shown in the image above, for navigation in a small warehouse environment using Isaac Sim. The robot, equipped with 2D and 3D LiDAR, fisheye, and depth cameras, was tasked to navigate static and dynamic obstacles.</p>
+
+            <h4>Static Obstacle Navigation (Scene 1):</h4>
+            <p>The image below depicts Isaac Sim and RViz2 side-by-side, with the robot planning a path around a static object in the warehouse. While the high-definition scene enhances realism, the robot experiences noticeable lag due to the computational demand of the graphics.</p>
+            <img src="carter_navigation_box.gif" alt="Scene 1: Navigation around static obstacles">
+
+            <h4>Dynamic Obstacle Detection (Scene 2):</h4>
+            <p>For dynamic obstacles, such as a person walking through the environment, the simulation struggled to update the map in real-time. By the time the person was detected and the map updated in RViz2, the person had already moved forward, leaving outdated occupancy marks. This delay compromises the reliability of real-time obstacle detection, an issue tied to the simulation and less likely to occur in real-world scenarios.</p>
+            <img src="carter_with_human.gif" alt="Scene 2: Dynamic obstacle detection">
+
+            <h3>Tradeoff: Graphics vs. Speed</h3>
+            <p>Isaac Sim’s high graphics quality comes at the cost of simulation speed, as shown in the image above. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like <strong>Gazebo</strong>, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.</p>
+
+            <h3>Challenges with Isaac Sim for Custom Robots</h3>
+            <p>Another critical challenge is adapting Isaac Sim nodes for custom robots and environments. For instance, configuring TF for custom robots often leads to issues with Isaac Sim’s built-in nodes failing to recognize parent-child relationships, causing delinked transforms. For example, the image below shows proper links with parent and child frames.</p>
+            <img src="nl/TFs.png" alt="Transforms">
+            <p>Isaac Sim provides several ROS2 nodes for handling TF transforms and odometry, such as:</p>
+            <ul>
+                <li><strong>TF Publisher</strong> for sensors and full articulation trees.</li>
+                <li><strong>Raw TF Publisher</strong> for individual transforms.</li>
+                <li><strong>Odometry Publisher</strong> for robot movement tracking.</li>
+            </ul>
+            <p>These nodes can be visualized in the Isaac Sim viewport for better debugging. However, the overhead in adapting and troubleshooting these nodes can be time-consuming.</p>
+            <img src="https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png" alt="Isaac Sim Nodes">
+
+            <h3>Recommendations</h3>
+            <p>While Isaac Sim is an excellent platform for high-fidelity simulations, it is not always ideal for scenarios requiring speed and efficiency. For testing safety protocols or creating realistic digital twins, alternatives like Gazebo might offer a more balanced solution. High-definition graphics are secondary to the ability to reliably test algorithms under realistic constraints.</p>
+        
+            
+            <h2>Why Gazebo Classic Can Do the Job Too</h2>
+            <p>Gazebo Classic is a straightforward and reliable simulation platform for robotics. Unlike NVIDIA Isaac Sim, which demands high processing power, Gazebo Classic balances speed, graphics, and computation power, making it a practical choice for many use cases.</p>
+
+            <h4>Features of Gazebo Classic:</h4>
+            <ul>
+                <li><strong>Ease of Sensor Integration:</strong><br>Gazebo plugins for both exteroceptive and proprioceptive sensors can be directly added to the robot description. Once configured, the robot can be spawned in a launch file with minimal setup.</li>
+                <li><strong>Customizable Environments:</strong><br>Gazebo Classic allows custom environments to be designed with ease. Built-in primitives like walls, doors, and other elements can be directly picked and placed within the simulation interface. This feature enables users to create detailed environments even before generating a map.</li>
+            </ul>
+
+            <h4>Example: Custom Robot in a Custom Environment</h4>
+            <p>Take a look at the <strong>custom robot in a custom Gazebo Classic environment</strong>.</p>
+            <img src="nl/gazebo_env.gif" alt="Gazebo classic environment with custom robot">
+            <p>In this example, the robot operates within a slightly modified environment, featuring walls surrounding the right side of the compound. Such modifications are effortless thanks to the built-in graphical interface.</p>
+
+            <h4>Advantages of Gazebo Classic:</h4>
+            <ul>
+                <li><strong>Speed:</strong><br>Gazebo Classic is faster than Isaac Sim because it does not require high-definition simulations. While it is slightly slower than Gazebo Fortress during initial loading, it operates seamlessly once loaded.</li>
+                <li><strong>User-Friendly Interface:</strong><br>Gazebo Classic’s built-in graphical interface simplifies the process of designing and testing environments for both indoor and outdoor scenarios.</li>
+                <li><strong>Community Support:</strong><br>As a legacy platform, Gazebo Classic boasts extensive online support and documentation, unlike the relatively newer Gazebo Fortress.</li>
+            </ul>
+
+            <h4>A Drawback: Lack of Realistic Crowd Animation</h4>
+            <p>While Isaac Sim offers realistic crowd animation to test moving humans in a simulated environment, Gazebo Classic does not have this feature. However, Gazebo Classic compensates for this limitation by allowing objects to be dropped in the middle of navigation to test <strong>dynamic obstacle detection</strong>. This functionality ensures that algorithms can still be validated for real-world scenarios involving unexpected obstacles.</p>
+
+            <h4>Use Cases for Gazebo Classic:</h4>
+            <p>Gazebo Classic is an excellent choice for testing algorithms, designing robots, and simulating indoor and outdoor environments. Its combination of moderate computational requirements, reasonable graphics, and faster performance makes it a practical option for those who prioritize functionality over high-definition realism.</p>
+
+            
+            <h2>Gazebo Fortress: The Bridge Between Classic and Modern Simulation</h2>
+            <p>Gazebo Fortress, the successor to Gazebo Classic, brings modern features and improved performance while maintaining the familiar usability of its predecessor. It offers enhanced simulation capabilities, making it a strong contender for robotics testing. However, it also introduces some complexities compared to Gazebo Classic, especially for those migrating existing ROS2 packages.</p>
+
+            <h4>Key Features of Gazebo Fortress:</h4>
+            <ul>
+                <li><strong>Improved Graphics and High-Definition Simulation:</strong><br>Gazebo Fortress enhances the graphical fidelity over Classic, offering more immersive environments. While not as graphically detailed as Isaac Sim, Fortress strikes a balance between realism and performance.</li>
+                <li><strong>Better Support for Dynamic Environments:</strong><br>Fortress introduces features like improved collision detection and smoother handling of dynamic objects, which are critical for testing algorithms involving moving obstacles.</li>
+                <li><strong>Enhanced Plugin Ecosystem:</strong><br>A rich plugin ecosystem allows for better integration of sensors and actuators, providing more flexibility for robot developers.</li>
+                <li><strong>Support for ROS 2 Packages:</strong><br>Migrating ROS 2 packages from Gazebo Classic to Fortress is relatively straightforward, thanks to the <a href="https://gazebosim.org/docs/fortress/migrating_gazebo_classic_ros2_packages/">migration guide</a>. However, some adaptation may be needed, especially for custom robots or environments.</li>
+            </ul>
+
+            <h4>Example: A Custom Four-Wheel Robot in Gazebo Fortress</h4>
+            <p>Take a look at the <strong>GIF below</strong>, showcasing <strong>a custom four-wheel robot designed in Gazebo Fortress</strong>. The robot demonstrates how Fortress’s enhanced features allow for more detailed and accurate simulations of navigation and other robotic functions.</p>
+            <img src="nl/fortress_robot.gif" alt="Gazebo Fortress Custom Robot Design">
+
+            <h4>Observations on Gazebo Fortress Environment</h4>
+            <p>The <strong>Gazebo Fortress environment</strong> supports advanced features such as better collision detection and handling of dynamic obstacles. This makes it a suitable choice for testing algorithms in environments requiring higher fidelity than Gazebo Classic while maintaining a manageable computational load compared to Isaac Sim.</p>
+
+            <h4>Observations and Trade-Offs:</h4>
+            <ul>
+                <li><strong>Performance vs. Graphics:</strong><br>While Gazebo Fortress improves graphical fidelity, it requires more processing power than Classic, though significantly less than Isaac Sim. This makes it a middle ground between the two platforms.</li>
+                <li><strong>Dynamic Obstacle Handling:</strong><br>Fortress performs better than Classic in handling dynamic objects, making it suitable for navigation scenarios involving moving humans or obstacles. However, Isaac Sim still leads in dynamic crowd animation.</li>
+                <li><strong>Learning Curve:</strong><br>For those already familiar with Gazebo Classic, transitioning to Fortress is manageable with the help of the <a href="https://gazebosim.org/docs/fortress/migrating_gazebo_classic_ros2_packages/">migration guide</a>. On the other hand, Isaac Sim’s steep learning curve might pose a challenge for newcomers.</li>
+            </ul>
+
+            <h4>Recommendation:</h4>
+            <p>Gazebo Fortress is ideal for those seeking a balance between performance, graphics, and usability. It is particularly well-suited for developers migrating from Gazebo Classic or those looking for advanced features without the heavy computational requirements of Isaac Sim.</p>
+        
+        
+        
+            
+            <h2>Incorporating Safety Protocols into Digital Twin Environments</h2>
+            <p>To ensure robust and safe human-robot interactions (HRI) in dynamic retail environments, several safety protocols have been identified and integrated into digital twin simulations. These protocols are designed to address potential hazards, ensure compliance with regulatory standards, and improve the reliability of robots operating in close proximity to humans.</p>
+
+            <h3>ISO 13482 – The New Safety Standard for Personal Care Robots</h3>
+            <p><strong>Introduction</strong><br>
+            ISO 13482 is a groundbreaking safety standard tailored for personal care robots operating in close interaction with humans in non-industrial settings. These robots assist humans in tasks such as mobility and support, where safe physical interaction is critical. By emphasizing collision avoidance, force limits, and autonomous decision-making safety mechanisms, ISO 13482 establishes a comprehensive framework for ensuring safety.</p>
+
+            <p>As my work focuses on developing digital twin-driven safety protocols for human-robot interaction (HRI) in retail environments using NVIDIA Isaac Sim, incorporating ISO 13482 ensures virtual and real-world robots adhere to internationally recognized safety standards.</p>
+
+            <h4>The Need for Incorporating ISO 13482 in Retail Robotics</h4>
+            <ul>
+                <li><strong>Close Proximity Operations:</strong> Robots often share spaces with people, requiring protocols to mitigate risks such as collisions or incorrect autonomous decisions.</li>
+                <li><strong>Human-Centric Risk Mitigation:</strong> The standard offers structured approaches to reducing hazards like physical contact, object mismanagement, and navigation errors.</li>
+                <li><strong>Compliance with Legal Standards:</strong> Adherence to ISO 13482 ensures that robots meet safety regulations essential for commercial deployment in retail settings.</li>
+            </ul>
+
+            <h4>Application in a Digital Twin Simulation Environment</h4>
+            <ul>
+                <li><strong>Simulating Hazard Scenarios:</strong> Guidelines for identifying hazards like collisions or loss of stability can be simulated to refine safety protocols.</li>
+                <li><strong>Testing Safety Measures Virtually:</strong> Force and speed limits, collision avoidance, and emergency stops can be validated before physical deployment.</li>
+                <li><strong>Validating Autonomous Decisions:</strong> Robots' decision-making algorithms are tested for robustness, ensuring safe navigation in complex retail scenarios.</li>
+            </ul>
+
+            <h3>IEEE P7009 – Fail-Safe Design Standard for Autonomous Systems</h3>
+            <p><strong>Introduction</strong><br>
+            The IEEE P7009 standard provides a framework for developing fail-safe mechanisms in autonomous and semi-autonomous systems. It focuses on transitioning systems to safe states during failures, ensuring safety without requiring human intervention. By incorporating fail-safe designs that autonomously detect and respond to failures, the standard minimizes potential harm and ensures predictable system behavior.</p>
+
+            <p>In this work, IEEE P7009 is integrated into a digital twin-driven approach using NVIDIA Isaac Sim to pre-validate fail-safe mechanisms for human-robot interaction (HRI) in retail environments. This allows for structured, risk-free testing of safety protocols in dynamic retail scenarios.</p>
+
+            <h4>Application in a Digital Twin Simulation Environment</h4>
+            <ul>
+                <li><strong>Simulating Failure Scenarios:</strong> Simulate events such as sensor malfunctions, navigation errors, or sudden obstacles to assess the robot's response according to IEEE P7009.</li>
+                <li><strong>Testing Autonomous Fail-Safe Responses:</strong> Evaluate responses like emergency stops, rerouting, or moving to safe zones in simulated environments.</li>
+                <li><strong>Assessing Safety Protocol Effectiveness:</strong> Refine fail-safe protocols by measuring their effectiveness in simulation before physical deployment.</li>
+            </ul>
+
+            <h3>Safety Protocols, Their Relevance, and Future Work/Gaps</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Protocol Name</th>
+                        <th>Summary</th>
+                        <th>Relevance</th>
+                        <th>Future Work/Gaps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ISO 13482</strong></td>
+                        <td>Safety standard for personal care robots, ensuring safe physical interaction between robots and humans, focusing on risk reduction and hazard management.</td>
+                        <td>Ensures safe human-robot interaction in retail by providing guidelines on collision avoidance, force limits, and risk mitigation.</td>
+                        <td>Has not been extensively tested in digital twin environments; future work could involve virtual validation before physical deployment.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IEEE P7009</strong></td>
+                        <td>Provides a framework for developing fail-safe mechanisms in autonomous systems, ensuring systems transition to safe states in case of failures.</td>
+                        <td>Ensures robots in retail environments can prevent harm by transitioning to safe states during failures, aligning with fail-safe human-robot interaction protocols.</td>
+                        <td>Future work should focus on integrating fail-safe mechanisms with digital twin simulations for better pre-validation of safety protocols in dynamic retail environments.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IEEE 7001-2021</strong></td>
+                        <td>Provides measurable, testable levels of transparency for autonomous systems, ensuring that their decision-making processes are discoverable and understandable.</td>
+                        <td>Ensures that retail robots interacting with humans operate transparently, making it possible to understand why and how the system made specific decisions.</td>
+                        <td>Ethical work should explore integrating transparency measures into digital twin simulations to validate the robot’s behavior before real-world deployment.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IEEE 1228</strong></td>
+                        <td>Provides guidelines for developing safety plans for software systems, addressing potential software failures in safety-critical applications.</td>
+                        <td>Relevant for designing safety plans for robot control software, ensuring software failures are anticipated and mitigated in human-robot interaction scenarios.</td>
+                        <td>Needs greater attention to unplanned software updates and their impact on safety in retail.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISO/TS 15066</strong></td>
+                        <td>Safety standards for collaborative robots (cobots), focusing on limits for force and speed to ensure safe human-robot interaction.</td>
+                        <td>Guides safety protocols for collaborative robots in retail, where safe interactions with force and speed limits are required.</td>
+                        <td>Future work involves refining force thresholds based on real-world interaction feedback in retail scenarios.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISO 12100</strong></td>
+                        <td>Defines principles for risk assessment and reduction in machinery, providing guidelines to identify hazards and implement protective measures.</td>
+                        <td>Provides a framework for risk assessment and mitigation in digital twin simulations, assisting in the development of safety protocols for retail robot behavior.</td>
+                        <td>Need to validate assessment models through iterative tests in digital twin and real-world conditions.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ </body>
+
+
+</html>
