@@ -863,9 +863,6 @@ The combination of **Smac Planner** and **MPPI Controller** demonstrates strong 
 - Optimize Smac Planner parameters for shorter paths and quicker stabilization.
 - Fine-tune MPPI cost weights for better responsiveness to dynamic obstacles.
 
----
-
-This detailed analysis highlights the strengths and limitations of this advanced configuration, guiding its application to specific use cases. Replace `path/to/...` with the actual paths to your GIFs to complete the visual representation. 😊
 
 ---
 
