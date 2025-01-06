@@ -77,13 +77,13 @@
     <div class="container">
         <div class="main-content">
             <h1>Digital Twin-Driven Safety Protocol Development for HRI in German Retail Stores</h1>
-            <img src="nl/workflow.jpg" alt="Workflow">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/workflow.webp" alt="Workflow">
             <p>Autonomous mobile robots are becoming increasingly intelligent through the integration of Artificial Intelligence (AI). These robots are now capable of making real-time decisions, such as determining optimal paths, navigating around obstacles, and dynamically choosing new routes. With advanced sensors like LiDAR and cameras, robots can detect and respond to both stationary and moving objects, ensuring the safety of people, themselves, and the surrounding environment.</p>
             <p>However, to operate safely and effectively, robots must adhere to strict safety protocols and comply with data protection regulations when interacting with humans. This is crucial to minimize risks, especially when deploying autonomous robots in settings such as retail stores or warehouses. Without thorough testing, there is a risk of accidents, injuries, or inventory damage. As a result, authorities have established safety regulations to ensure that robots are designed with compliance in mind.</p>
             <p>To address these challenges, MYBOTSHOP is investing significant time and resources into training students to test and validate safety protocols and data protection policies for both new and existing robots within simulation environments. These simulated tests ensure that robots can be safely deployed in real-world scenarios without jeopardizing human lives or privacy.</p>
 
             <h2>Comparison of Simulation Environments</h2>
-            <img src="nl/SE.jpg" alt="Simulation Environments">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/SE.webp" alt="Simulation Environments">
             <p>Testing autonomous robots in simulation environments is essential to evaluate their performance under both expected and unexpected conditions. This raises an important question: <strong>Which simulation environment is best for testing diverse scenarios?</strong></p>
             <p>To answer this, let’s compare three prominent simulation platforms: <strong>Gazebo Classic</strong>, <strong>Gazebo Fortress</strong>, and <strong>NVIDIA Isaac Sim</strong> (developed by Omniverse). Each platform has unique strengths and limitations, as highlighted in the <strong>comparison chart above</strong>.</p>
             <ul>
@@ -112,23 +112,27 @@
 
             <h3>Real-World Test: Navigation in a Warehouse Environment</h3>
             <img src="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" alt="NOVA Carter Robot">
-            <p><em>[Figure 1: NOVA Carter Robot navigating a warehouse environment.]</em></p>
+            <p>
+                <a href="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" target="_blank">
+                    <em>[Figure 1: NOVA Carter Robot navigating a warehouse environment.]</em>
+                </a>
+            </p>
             <p>In our observations, we tested the <strong>Nova Carter robot</strong>, as shown in the image above, for navigation in a small warehouse environment using Isaac Sim. The robot, equipped with 2D and 3D LiDAR, fisheye, and depth cameras, was tasked to navigate static and dynamic obstacles.</p>
 
             <h4>Static Obstacle Navigation (Scene 1):</h4>
             <p>The image below depicts Isaac Sim and RViz2 side-by-side, with the robot planning a path around a static object in the warehouse. While the high-definition scene enhances realism, the robot experiences noticeable lag due to the computational demand of the graphics.</p>
-            <img src="carter_navigation_box.gif" alt="Scene 1: Navigation around static obstacles">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/carter_navigation.webp" alt="Scene 1: Navigation around static obstacles">
 
             <h4>Dynamic Obstacle Detection (Scene 2):</h4>
             <p>For dynamic obstacles, such as a person walking through the environment, the simulation struggled to update the map in real-time. By the time the person was detected and the map updated in RViz2, the person had already moved forward, leaving outdated occupancy marks. This delay compromises the reliability of real-time obstacle detection, an issue tied to the simulation and less likely to occur in real-world scenarios.</p>
-            <img src="carter_with_human.gif" alt="Scene 2: Dynamic obstacle detection">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/carter_with_human.webp" alt="Scene 2: Dynamic obstacle detection">
 
             <h3>Tradeoff: Graphics vs. Speed</h3>
             <p>Isaac Sim’s high graphics quality comes at the cost of simulation speed, as shown in the image above. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like <strong>Gazebo</strong>, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.</p>
 
             <h3>Challenges with Isaac Sim for Custom Robots</h3>
             <p>Another critical challenge is adapting Isaac Sim nodes for custom robots and environments. For instance, configuring TF for custom robots often leads to issues with Isaac Sim’s built-in nodes failing to recognize parent-child relationships, causing delinked transforms. For example, the image below shows proper links with parent and child frames.</p>
-            <img src="nl/TFs.png" alt="Transforms">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/TFs.webp" alt="Transforms">
             <p>Isaac Sim provides several ROS2 nodes for handling TF transforms and odometry, such as:</p>
             <ul>
                 <li><strong>TF Publisher</strong> for sensors and full articulation trees.</li>
@@ -137,7 +141,11 @@
             </ul>
             <p>These nodes can be visualized in the Isaac Sim viewport for better debugging. However, the overhead in adapting and troubleshooting these nodes can be time-consuming.</p>
             <img src="https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png" alt="Isaac Sim Nodes">
-
+            <p>
+                <a href="https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png" target="_blank">
+                    Source: Isaac Sim Nodes
+                </a>
+            </p>
             <h3>Recommendations</h3>
             <p>While Isaac Sim is an excellent platform for high-fidelity simulations, it is not always ideal for scenarios requiring speed and efficiency. For testing safety protocols or creating realistic digital twins, alternatives like Gazebo might offer a more balanced solution. High-definition graphics are secondary to the ability to reliably test algorithms under realistic constraints.</p>
         
@@ -153,7 +161,7 @@
 
             <h4>Example: Custom Robot in a Custom Environment</h4>
             <p>Take a look at the <strong>custom robot in a custom Gazebo Classic environment</strong>.</p>
-            <img src="nl/gazebo_env.gif" alt="Gazebo classic environment with custom robot">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/gazebo_env.webp" alt="Gazebo classic environment with custom robot">
             <p>In this example, the robot operates within a slightly modified environment, featuring walls surrounding the right side of the compound. Such modifications are effortless thanks to the built-in graphical interface.</p>
 
             <h4>Advantages of Gazebo Classic:</h4>
@@ -183,7 +191,7 @@
 
             <h4>Example: A Custom Four-Wheel Robot in Gazebo Fortress</h4>
             <p>Take a look at the <strong>GIF below</strong>, showcasing <strong>a custom four-wheel robot designed in Gazebo Fortress</strong>. The robot demonstrates how Fortress’s enhanced features allow for more detailed and accurate simulations of navigation and other robotic functions.</p>
-            <img src="nl/fortress_robot.gif" alt="Gazebo Fortress Custom Robot Design">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/fortress_robot.webp" alt="Gazebo Fortress Custom Robot Design">
 
             <h4>Observations on Gazebo Fortress Environment</h4>
             <p>The <strong>Gazebo Fortress environment</strong> supports advanced features such as better collision detection and handling of dynamic obstacles. This makes it a suitable choice for testing algorithms in environments requiring higher fidelity than Gazebo Classic while maintaining a manageable computational load compared to Isaac Sim.</p>
@@ -328,7 +336,7 @@
                 <li><strong>Real-Time Processing:</strong> Executes object blurring efficiently in dynamic environments, making it suitable for instant privacy enhancements.</li>
             </ul>
             <p>Using YOLOv11, I trained and deployed a model on the <strong>Go2 robot</strong>. As shown in the <strong>GIF below</strong>, the robot can detect a person’s face, blur the region effectively, and display this blurred view on its screen. This functionality works as long as the person remains within the robot camera’s frame.</p>
-            <img src="nl/faceblur.gif" alt="Object Blurring GIF">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/faceblur.webp" alt="Object Blurring GIF">
 
             <h3>YOLOv11 Performance Comparison</h3>
             <p>The chart below illustrates how YOLOv11 outperforms earlier models like YOLOv8 in terms of speed and accuracy. YOLOv11 introduces significant improvements, making it the preferred choice for real-time applications such as privacy-focused object detection and blurring.</p>
@@ -357,7 +365,7 @@
                 <li><strong>Pose Estimation:</strong> The 3D pose of objects can be calculated, helping robots identify the orientation and position of objects.</li>
             </ul>
             <p>As shown in the <strong>GIF below</strong>, the robot classified a handbag with approximately 84% accuracy, demonstrating the capability to detect and classify objects. This was achieved using a trained YOLOv8 model, with data preprocessing and augmentation performed using <strong>RoboFlow</strong>.</p>
-            <img src="nl/Object_detection_wrt_camera_frame.gif" alt="3D Object Pose Detection">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/Object_detection_wrt_camera_frame.webp" alt="3D Object Pose Detection">
 
             <h3>Why I Chose YOLOv8</h3>
             <p>I selected the YOLOv8 model for this task because of its flexibility and support for multiple tasks such as detection, classification, and segmentation. Below is a comparison of its key features, which influenced my decision:</p>
@@ -414,7 +422,7 @@
             <p>Here’s a visual representation of the 18 key points tracked by the ZED 2i camera:</p>
             <img src="https://docs.stereolabs.com/body-tracking/images/keypoints_body18.png" alt="Body Tracking Key Points">
             <p>Below is a <strong>GIF of a scene showcasing keypoints being detected in real-time</strong> using the ZED 2i camera:</p>
-            <img src="nl/bodytracking.gif" alt="Keypoints Detection GIF">
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/bodytracking.webp" alt="Keypoints Detection GIF">
             <p>The GIF illustrates how the ZED 2i camera accurately tracks and detects human movements by identifying body keypoints, ensuring seamless performance in dynamic environments like retail stores.</p>
             <p>Another compelling reason for experimenting with the ZED 2i camera is its <strong>availability within Isaac Sim</strong>. NVIDIA Isaac Sim supports the ZED 2i camera as a virtual sensor, allowing developers to test and validate robotics applications in high-fidelity simulated environments before deploying them in real-world scenarios.</p>
             <img src="https://docs.stereolabs.com/isaac-sim/images/ZED_in_isaac_sim.jpg" alt="zed2i in isaac sim">
