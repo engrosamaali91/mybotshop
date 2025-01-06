@@ -441,6 +441,384 @@
             </ul>    
                 These insights and tools lay a strong foundation for creating robust object detection systems, especially in settings where robots need to navigate and interact with complex environments efficiently.</li>
 
+
+
+            <h2>Understanding Robot Decision-Making: Local and Global Planners</h1>
+            <p>Now that we have discussed the need to validate safety protocols and data protection policies—and identified each—it is time to explore what makes a robot autonomous. Specifically, we will dive into <strong>how robots make decisions in different scenarios</strong> and how planners influence these decisions during operation.</p>
+
+            <h3>Local and Global Planners</h3>
+            <p>Robots rely on two types of planners to navigate their environments: <strong>local planners</strong> and <strong>global planners</strong>. Each plays a distinct role in ensuring safe, efficient, and autonomous operation.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Local Planner</th>
+                        <th>Global Planner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Scope</td>
+                        <td>Handles short-term, real-time navigation and obstacle avoidance.</td>
+                        <td>Plans long-term paths from the robot’s start point to its goal.</td>
+                    </tr>
+                    <tr>
+                        <td>Focus</td>
+                        <td>Dynamic obstacle handling and maintaining a smooth, collision-free trajectory.</td>
+                        <td>Optimizing the overall route based on the map, environment, and defined goals.</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency</td>
+                        <td>Operates at a higher frequency (e.g., 10 Hz) for real-time adjustments.</td>
+                        <td>Operates at a lower frequency (e.g., 1 Hz) to minimize computational overhead.</td>
+                    </tr>
+                    <tr>
+                        <td>Impact on Safety</td>
+                        <td>Ensures immediate responsiveness to nearby obstacles and path deviations.</td>
+                        <td>Avoids hazardous routes or areas that could compromise the robot's operation.</td>
+                    </tr>
+                    <tr>
+                        <td>Key Parameters</td>
+                        <td>Velocity limits, inflation radius, yaw tolerance for precise control.</td>
+                        <td>Map cost layers, goal tolerance for efficient and safe long-term planning.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Nav2 Global Planners and Local Controllers</h3>
+            <p>The Nav2 stack provides a robust framework for implementing local and global planners, each tailored to specific use cases and operational environments. The table below categorizes the available planners and controllers:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Global Planner</td>
+                        <td>NavFn Planner</td>
+                        <td>Utilizes Dijkstra's algorithm to compute the shortest path on a costmap.</td>
+                    </tr>
+                    <tr>
+                        <td>Global Planner</td>
+                        <td>Smac Planner</td>
+                        <td>Offers different variants, including 2D and Hybrid-A* planners, suitable for various robot types and environments.</td>
+                    </tr>
+                    <tr>
+                        <td>Global Planner</td>
+                        <td>Theta Planner</td>
+                        <td>Computes paths that are more direct by allowing diagonal movements, reducing unnecessary turns.</td>
+                    </tr>
+                    <tr>
+                        <td>Local Controller</td>
+                        <td>DWB (Dynamic Window Approach)</td>
+                        <td>Evaluates a set of possible trajectories and selects the one that optimally balances progress toward the goal, speed, and obstacle avoidance.</td>
+                    </tr>
+                    <tr>
+                        <td>Local Controller</td>
+                        <td>Regulated Pure Pursuit</td>
+                        <td>Focuses on following the global path accurately, adjusting the robot's speed based on proximity to obstacles and path curvature.</td>
+                    </tr>
+                    <tr>
+                        <td>Local Controller</td>
+                        <td>MPPI (Model Predictive Path Integral)</td>
+                        <td>Uses a model predictive control approach to optimize control commands over a future horizon, considering the robot's dynamics and environmental constraints.</td>
+                    </tr>
+                    <tr>
+                        <td>Local Controller</td>
+                        <td>Rotation Shim Controller</td>
+                        <td>Handles in-place rotation behaviors, ensuring the robot can correctly orient itself before proceeding along the path.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Moving Forward</h3>
+            <p>In the following sections, we will explore how these planners influence robot behavior in specific scenarios:</p>
+            <ol>
+                <li>Going in a Straight Line</li>
+                <li>Navigating Around Static Obstacles</li>
+                <li>Navigating Around Dynamic Obstacles</li>
+            </ol>
+
+            <h3>Relevant Parameters for Navigation Experiments</h3>
+            <p>These are the default parameters of the Nav2 stack. In the following experiments, these parameters will be tweaked for different scenarios, planners, and controllers:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter Group</th>
+                        <th>Parameter Name</th>
+                        <th>Value</th>
+                        <th>Purpose/Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AMCL Configuration</td>
+                        <td>use_sim_time</td>
+                        <td>True</td>
+                        <td>Ensures simulation time is used for synchronization.</td>
+                    </tr>
+                    <tr>
+                        <td>Controller Server</td>
+                        <td>controller_frequency</td>
+                        <td>20.0</td>
+                        <td>Frequency at which local controllers compute control commands.</td>
+                    </tr>
+                    <tr>
+                        <td>Costmap Parameters</td>
+                        <td>local_costmap.width</td>
+                        <td>3.0</td>
+                        <td>Defines the width of the local costmap in meters.</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+
+
+
+            <h4>Combination 1: NavFn Planner + DWB Local Planner</h4>
+            <p>This configuration employs the <strong>NavFn Planner</strong> for global path planning and the <strong>DWB Local Planner</strong> for local trajectory adjustments.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Plugin/Server</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Planner Server</td>
+                        <td><code>nav2_navfn_planner/NavfnPlanner</code></td>
+                        <td>Global Planner</td>
+                        <td>Computes the shortest path from start to goal using Dijkstra's algorithm on a costmap.</td>
+                    </tr>
+                    <tr>
+                        <td>Controller Server</td>
+                        <td><code>dwb_core::DWBLocalPlanner</code></td>
+                        <td>Local Controller</td>
+                        <td>Evaluates possible trajectories and selects the one that optimally balances progress, speed, and obstacle avoidance.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Observations and Results</h5>
+            <ol>
+                <li>
+                    <strong>Straight-Line Movement</strong><br>
+                    <ul>
+                        <li>The robot adhered closely to the planned trajectory with minimal drift.</li>
+                        <li>Smooth motion was achieved by tuning parameters such as <code>max_velocity</code> and <code>yaw_goal_tolerance</code>.</li>
+                    </ul>
+                    <img src="comb_1/straightline.gif" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    <div class="note">
+                        <strong>Note:</strong> The scene is speed-forwarded and does not reflect true speed (i.e., 0.26 m/s).
+                    </div>
+                </li>
+                <li>
+                    <strong>Static Obstacles</strong><br>
+                    <ul>
+                        <li>The robot slowed down at the junction and adjusted its speed.</li>
+                        <li>Trajectory adjustments were made by the robot, and it remained on the global path.</li>
+                        <li>Minor path deviations were corrected by the local controller.</li>
+                    </ul>
+                    <img src="comb_1/aroundstatic.gif" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Dynamic Obstacles</strong><br>
+                    <ul>
+                        <li>The robot successfully responded to a moving cube as a placeholder for a moving person but exhibited slight delays when encountering faster objects.</li>
+                        <li>The robot did not collide with the moving cube.</li>
+                        <li>The robot did not maintain a safe distance, likely due to suboptimal tuning of parameters such as <code>inflation_radius</code>, <code>PathDist.scale</code>, or <code>obstacle_max_range</code> in the local and global costmaps.</li>
+                    </ul>
+                    <img src="comb_1/DynamicObstacles.gif" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+            </ol>
+
+            <h5>Performance Summary</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Straight-Line Movement</td>
+                        <td>Smooth and precise navigation.</td>
+                    </tr>
+                    <tr>
+                        <td>Static Obstacles</td>
+                        <td>Reliable obstacle avoidance with minor deviations.</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Obstacles</td>
+                        <td>Adequate responsiveness to slow-moving obstacles; improvement needed for fast-moving objects and maintaining safe distance.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Future Considerations</h5>
+            <ul>
+                <li>The <strong>TEB Local Planner</strong> could be explored for enhanced handling of dynamic obstacles.</li>
+                <li>The <strong>Theta* Global Planner</strong> may be utilized for more direct and efficient path generation.</li>
+            </ul>
+
+
+
+            <h4>Combination 2: NavFn Planner + MPPI Controller</h4>
+            <p>This configuration utilizes the <strong>NavFn Planner</strong> for global path planning and the <strong>MPPI (Model Predictive Path Integral) Controller</strong> for local trajectory optimization. This combination is designed to balance efficiency, smoothness, and dynamic obstacle handling.</p>
+
+            <h5>Why MPPI Controller is a Good Choice</h5>
+            <p>The <strong>MPPI Controller</strong> is well-suited for dynamic environments requiring real-time adjustments. It optimizes trajectories by considering the robot’s dynamics and environmental constraints, making it highly effective for:</p>
+            <ul>
+                <li><strong>Dynamic Obstacle Avoidance:</strong> Evaluates multiple trajectories to select the optimal path while avoiding collisions.</li>
+                <li><strong>Smooth Path Generation:</strong> Produces jerk-free motions for stable operations.</li>
+                <li><strong>Real-Time Performance:</strong> Delivers responsive and efficient control in dynamic scenarios.</li>
+            </ul>
+
+            <h5>Relevant Parameters for MPPI Controller</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>time_horizon</code></td>
+                        <td>1.5</td>
+                        <td>Time horizon over which the trajectory is optimized.</td>
+                    </tr>
+                    <tr>
+                        <td><code>desired_linear_velocity</code></td>
+                        <td>0.5</td>
+                        <td>Target velocity for the robot's linear motion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>desired_angular_velocity</code></td>
+                        <td>1.0</td>
+                        <td>Target velocity for the robot's angular motion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>linear_acceleration_limit</code></td>
+                        <td>2.0</td>
+                        <td>Maximum allowed linear acceleration for smoother motion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>angular_acceleration_limit</code></td>
+                        <td>3.0</td>
+                        <td>Maximum allowed angular acceleration for smoother turns.</td>
+                    </tr>
+                    <tr>
+                        <td><code>optimizer_iterations</code></td>
+                        <td>1000</td>
+                        <td>Number of iterations for trajectory optimization in each cycle.</td>
+                    </tr>
+                    <tr>
+                        <td><code>cost_weights.path_following</code></td>
+                        <td>10.0</td>
+                        <td>Weight for staying close to the planned path.</td>
+                    </tr>
+                    <tr>
+                        <td><code>cost_weights.collision_avoidance</code></td>
+                        <td>15.0</td>
+                        <td>Weight for avoiding collisions with obstacles.</td>
+                    </tr>
+                    <tr>
+                        <td><code>cost_weights.smoothness</code></td>
+                        <td>5.0</td>
+                        <td>Weight for ensuring smooth trajectories.</td>
+                    </tr>
+                    <tr>
+                        <td><code>lookahead_dist</code></td>
+                        <td>0.6</td>
+                        <td>Distance ahead of the robot for trajectory optimization.</td>
+                    </tr>
+                    <tr>
+                        <td><code>transform_tolerance</code></td>
+                        <td>0.1</td>
+                        <td>Tolerance for transform lookups to ensure stability in real-time adjustments.</td>
+                    </tr>
+                    <tr>
+                        <td><code>visualize_optimizer</code></td>
+                        <td>true</td>
+                        <td>Enables visualization of the optimized trajectories for debugging in RViz.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Testing Scenarios and Observations</h5>
+            <ol>
+                <li>
+                    <strong>Straight-Line Movement</strong><br>
+                    <ul>
+                        <li>The robot followed a smooth and precise trajectory with minimal drift.</li>
+                        <li>Real-time trajectory optimization ensured stable motion.</li>
+                    </ul>
+                    <img src="comb_2/straightline.gif" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Navigating Static Obstacles</strong><br>
+                    <ul>
+                        <li>The controller successfully adjusted the robot's path to avoid obstacles, maintaining smooth transitions.</li>
+                        <li>Dynamic trajectory optimization minimized unnecessary deviations.</li>
+                    </ul>
+                    <img src="comb_2/static.gif" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Navigating Dynamic Obstacles</strong><br>
+                    <ul>
+                        <li>The robot responded effectively to moving obstacles, recalculating the trajectory in real time.</li>
+                        <li>The robot maintained a safe distance from the moving object.</li>
+                        <li>Optimized control commands reduced delays in avoiding faster-moving objects.</li>
+                    </ul>
+                    <img src="comb_2/dynamic.gif" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+            </ol>
+
+            <h5>Performance Summary</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Straight-Line Movement</td>
+                        <td>Smooth and precise navigation.</td>
+                    </tr>
+                    <tr>
+                        <td>Static Obstacles</td>
+                        <td>Reliable obstacle avoidance with smooth trajectory adjustments.</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Obstacles</td>
+                        <td>Effective real-time responses to moving obstacles.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Conclusion</h5>
+            <p>The combination of <strong>NavFn Planner</strong> and <strong>MPPI Controller</strong> provided robust performance across all scenarios. Its ability to handle dynamic obstacles and generate smooth trajectories makes it an excellent choice for complex environments.</p>
+
+            <h6>Future Improvements</h6>
+            <ul>
+                <li>Further tuning of <strong>cost weights</strong> and <strong>time horizon</strong> could enhance responsiveness in highly dynamic settings.</li>
+                <li>Exploring alternate global planners, such as <strong>Smac (Hybrid-A*)</strong>, may yield better path efficiency for intricate environments.</li>
+            </ul>
         </div>
     </div>
  </body>
