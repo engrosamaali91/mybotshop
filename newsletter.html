@@ -819,6 +819,500 @@
                 <li>Further tuning of <strong>cost weights</strong> and <strong>time horizon</strong> could enhance responsiveness in highly dynamic settings.</li>
                 <li>Exploring alternate global planners, such as <strong>Smac (Hybrid-A*)</strong>, may yield better path efficiency for intricate environments.</li>
             </ul>
+
+
+
+            <h4>Combination 3: NavFn Planner + Regulated Pure Pursuit Controller</h4>
+            <p>This configuration utilizes the <strong>NavFn Planner</strong> for global path planning and the <strong>Regulated Pure Pursuit Controller</strong> for local trajectory adjustments. While this combination is highly efficient for straight-line movements, its performance diminishes when navigating through close proximities or dynamic environments.</p>
+        
+            <h5>Why Regulated Pure Pursuit Controller is a Good Choice</h5>
+            <p>The <strong>Regulated Pure Pursuit Controller</strong> is known for its simplicity and reliability in following global paths, particularly in open environments. It is designed to scale its velocity based on proximity to obstacles and path curvature, ensuring smooth and precise motion.</p>
+            <ul>
+                <li><strong>Ideal for Straight-Line Movements:</strong> Ensures smooth and predictable navigation without significant path deviations.</li>
+                <li><strong>Velocity Regulation:</strong> Dynamically adjusts speed to maintain safety when approaching obstacles.</li>
+                <li><strong>Ease of Tuning:</strong> Fewer parameters compared to more complex controllers, simplifying configuration.</li>
+            </ul>
+        
+            <h5>Relevant Parameters for Regulated Pure Pursuit Controller</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>desired_linear_vel</code></td>
+                        <td>0.5</td>
+                        <td>Target velocity for the robot's linear motion.</td>
+                    </tr>
+                    <tr>
+                        <td><code>lookahead_dist</code></td>
+                        <td>0.6</td>
+                        <td>Distance ahead of the robot for trajectory adjustments.</td>
+                    </tr>
+                    <tr>
+                        <td><code>min_lookahead_dist</code></td>
+                        <td>0.3</td>
+                        <td>Minimum distance for trajectory adjustments.</td>
+                    </tr>
+                    <tr>
+                        <td><code>max_lookahead_dist</code></td>
+                        <td>0.9</td>
+                        <td>Maximum distance for trajectory adjustments.</td>
+                    </tr>
+                    <tr>
+                        <td><code>rotate_to_heading_angular_vel</code></td>
+                        <td>1.8</td>
+                        <td>Angular velocity for orienting toward the path heading.</td>
+                    </tr>
+                    <tr>
+                        <td><code>use_velocity_scaled_lookahead_dist</code></td>
+                        <td>false</td>
+                        <td>Disables scaling of lookahead distance based on velocity.</td>
+                    </tr>
+                    <tr>
+                        <td><code>use_collision_detection</code></td>
+                        <td>true</td>
+                        <td>Enables obstacle detection for safer navigation.</td>
+                    </tr>
+                    <tr>
+                        <td><code>max_allowed_time_to_collision_up_to_carrot</code></td>
+                        <td>1.0</td>
+                        <td>Maximum allowed time to potential collisions along the path.</td>
+                    </tr>
+                    <tr>
+                        <td><code>min_approach_linear_velocity</code></td>
+                        <td>0.05</td>
+                        <td>Minimum velocity when approaching a goal or obstacle.</td>
+                    </tr>
+                    <tr>
+                        <td><code>transform_tolerance</code></td>
+                        <td>0.1</td>
+                        <td>Tolerance for transform lookups to ensure stability in real-time adjustments.</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <h5>Testing Scenarios and Observations</h5>
+            <ol>
+                <li>
+                    <strong>Straight-Line Movement</strong><br>
+                    <ul>
+                        <li>The robot navigated smoothly and efficiently, adhering to the global path without significant deviations.</li>
+                        <li>Velocity regulation ensured stable and precise motion.</li>
+                    </ul>
+                    <img src="comb_3/straight.gif" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Navigating Static Obstacles</strong><br>
+                    <ul>
+                        <li>Performance was suboptimal, particularly when passing through close gaps.</li>
+                        <li>The robot struggled with efficiency compared to other combinations like NavFn + DWB and NavFn + MPPI.</li>
+                    </ul>
+                    <img src="comb_3/static2.gif" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Navigating Dynamic Obstacles</strong><br>
+                    <ul>
+                        <li>The robot managed to replan and avoid moving obstacles, but the response time was slower than other controllers.</li>
+                        <li>While it successfully reached the goal pose, the delay in path adjustments indicated limited efficiency in dynamic scenarios.</li>
+                    </ul>
+                    <img src="comb_3/Dynamic.gif" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+            </ol>
+        
+            <h5>Performance Summary</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Straight-Line Movement</td>
+                        <td>Smooth and precise navigation, ideal for open spaces.</td>
+                    </tr>
+                    <tr>
+                        <td>Static Obstacles</td>
+                        <td>Struggled with close proximities, less efficient compared to other combinations.</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Obstacles</td>
+                        <td>Slow in replanning and path adjustments, though able to reach the goal.</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <h5>Conclusion</h5>
+            <p>The combination of <strong>NavFn Planner</strong> and <strong>Regulated Pure Pursuit Controller</strong> is well-suited for open environments with minimal obstacles. However, its limitations become evident in more complex scenarios, such as navigating through tight spaces or reacting to dynamic obstacles.</p>
+        
+            <h6>Future Improvements</h6>
+            <ul>
+                <li>Consider using <strong>DWB</strong> or <strong>MPPI</strong> for environments with close proximities or high dynamic activity.</li>
+                <li>Fine-tune parameters like <code>lookahead_dist</code> and enable <strong>velocity-scaled lookahead</strong> for more responsive adjustments.</li>
+            </ul>
+        
+            <h5>Interconnected Nodes in Nav2 Stack</h5>
+            <p>To better understand the communication between various components of the Nav2 stack, here’s the <strong>RQT Graph</strong> visualization of interconnected nodes. This includes key nodes like the <strong>local cost map</strong>, <strong>global cost map</strong>, <strong>controller server</strong>, <strong>planner server</strong>, and <strong>behavior server</strong>.</p>
+            <img src="comb_3/rosgraph.png" alt="RQT Graph Visualization" style="width:100%; max-width:600px;">
+        
+            <div class="note">
+                <strong>Note:</strong> The RQT graph illustrates how these components interact to ensure smooth and efficient navigation. Each node plays a critical role:
+                <ul>
+                    <li><strong>Planner Server:</strong> Computes the global path.</li>
+                    <li><strong>Controller Server:</strong> Adjusts the local trajectory for real-time obstacle avoidance.</li>
+                    <li><strong>Behavior Server:</strong> Manages higher-level behaviors like spinning, backing up, and driving on heading.</li>
+                    <li><strong>Cost Maps:</strong> Provide the environmental representation for planning and obstacle avoidance.</li>
+                </ul>
+                This interconnected structure ensures seamless communication and dynamic adaptability during navigation.
+
+            </div>
+
+            <h4>Combination 4: Theta* + Regulated Pure Pursuit Controller</h4>
+
+            <h5>How Theta* Differs from Navfn Planner</h5>
+            <p>The <strong>Theta*</strong> planner generates any-angle paths with smoother, more direct line segments, while <strong>Navfn</strong> is constrained to grid-based paths, resulting in more angular and less efficient routes.</p>
+
+            <h5>Theta* + RPP: Observations and Insights</h5>
+
+            <h6>Straight-Line Movement</h6>
+            <p>In a straightforward scenario, the robot moved along a straight line as expected when the path was unobstructed. This behavior highlights the efficiency of the Theta* planner in generating direct, any-angle paths, reducing unnecessary turns, and optimizing the travel distance.</p>
+            <img src="comb_4/straight.gif" alt="Straight-Line Movement" style="width:100%; max-width:600px;">
+
+            <h6>Static Environment</h6>
+            <p>When multiple waypoints were provided, the robot recalculated the path dynamically instead of strictly following the given waypoints. It took a shortcut, reaching the goal faster than if it had adhered to the exact waypoints.</p>
+            <p><strong>Reason:</strong> The Theta* planner is designed to optimize for the shortest and most efficient path between the start and goal. Waypoints, unless enforced as strict constraints, are treated as optional guides. The recalculated shortcut reflects the planner’s inherent focus on path optimization and reduced traversal time.</p>
+            <img src="comb_4/static.gif" alt="Static Environment Shortcut" style="width:100%; max-width:600px;">
+
+            <h6>Dynamic Environment</h6>
+            <p>In a dynamic setup, a walking person primitive was introduced as a moving obstacle:</p>
+            <ul>
+                <li><strong>First Trial:</strong> The robot collided with the moving person, likely due to limitations in the <strong>RPP local planner</strong> as observed in conjunction with the Navfn planner, which did not react quickly enough to the dynamic change.</li>
+                <li><strong>Second Trial:</strong> After the person moved aside, the robot successfully stopped, recalculated a shorter path, and reached the goal.</li>
+            </ul>
+            <img src="comb_4/dynamic.gif" alt="Dynamic Successful Trial 2" style="width:100%; max-width:600px;">
+            <p><strong>Reason:</strong> This outcome underscores the adaptability of Theta* + RPP (Reactive Path Planning). The planner dynamically recalculated the path based on real-time updates, showcasing its ability to handle dynamic obstacles effectively. The successful adjustment in the second trial highlights the importance of robust integration between the global and local planning layers.</p>
+
+            <h5>Performance Summary</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Performance</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Straight-Line Movement</td>
+                        <td>Smooth and efficient direct paths.</td>
+                        <td>Theta* generates optimal, any-angle paths, making it ideal for open and unconstrained environments.</td>
+                    </tr>
+                    <tr>
+                        <td>Static Obstacles</td>
+                        <td>Dynamically recalculates efficient paths.</td>
+                        <td>Bypasses unnecessary waypoints to optimize travel time and distance in static environments.</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Obstacles</td>
+                        <td>Relies on the local planner for handling dynamic changes effectively.</td>
+                        <td>RPP’s responsiveness impacts success; improvements in local planner integration could enhance reliability.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>These observations illustrate the strengths of Theta* + RPP in both static and dynamic scenarios. While the planner excels at optimizing paths, ensuring a robust local planner is critical for managing dynamic obstacles in real-world environments.</p>
+
+
+
+
+            <h4>Combination 5: Smac Planner + MPPI</h4>
+
+            <h5>Navigation Performance: Testing Smac Planner + MPPI Controller</h5>
+            <p>The combination of the <strong>Smac Planner</strong> and <strong>MPPI Controller</strong> represents an advanced setup designed to handle complex navigation scenarios. While the Smac Planner excels at generating smooth, kinematic-aware paths, the MPPI Controller provides real-time trajectory optimization and dynamic obstacle handling.</p>
+        
+            <h5>Testing Scenarios and Observations</h5>
+            <ol>
+                <li>
+                    <strong>Straight-Line Movement</strong><br>
+                    <ul>
+                        <li>The robot performed satisfactorily, following a smooth and direct path.</li>
+                        <li>No significant deviations or delays were observed.</li>
+                    </ul>
+                    <img src="comb_5/Straight.gif" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Navigating Static Obstacles</strong><br>
+                    <ul>
+                        <li>The Smac Planner generated a longer path to avoid obstacles.</li>
+                        <li>As the robot approached the goal, it took additional time to stabilize.</li>
+                        <li>The robot struggled slightly when passing through narrow gaps between walls, experiencing delays due to repeated replanning.</li>
+                    </ul>
+                    <img src="comb_5/Static.gif" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+                <li>
+                    <strong>Navigating Dynamic Obstacles</strong><br>
+                    <ul>
+                        <li>The robot detected a moving wheelchair but was less robust in avoiding it compared to the NavFn + MPPI combination.</li>
+                        <li>Multiple replanning attempts were necessary to successfully navigate around the obstacle.</li>
+                        <li>Despite these challenges, the robot ultimately reached the goal.</li>
+                    </ul>
+                    <img src="comb_5/Dynamic.gif" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                </li>
+            </ol>
+        
+            <h5>Performance Summary</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Straight-Line Movement</td>
+                        <td>Smooth and efficient navigation.</td>
+                    </tr>
+                    <tr>
+                        <td>Static Obstacles</td>
+                        <td>Planned longer paths; delays in narrow gaps and stabilizing near the goal.</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Obstacles</td>
+                        <td>Detected moving objects but struggled with robustness; required multiple replans.</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <h5>Conclusion</h5>
+            <p>The combination of <strong>Smac Planner</strong> and <strong>MPPI Controller</strong> demonstrates strong potential for complex environments, particularly in scenarios requiring kinematic awareness and smooth trajectory optimization. However, challenges remain:</p>
+            <ul>
+                <li><strong>Static Obstacles:</strong> Path planning and stabilization need improvement for close proximities.</li>
+                <li><strong>Dynamic Obstacles:</strong> Responsiveness to fast-moving objects requires further tuning.</li>
+            </ul>
+        
+            <h6>Future Improvements</h6>
+            <ul>
+                <li>Optimize Smac Planner parameters for shorter paths and quicker stabilization.</li>
+                <li>Fine-tune MPPI cost weights for better responsiveness to dynamic obstacles.</li>
+            </ul>
+
+
+
+            <h3>Navigation Performance and Suitability for Safety Scenarios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Global Planner + Local Controller</th>
+                        <th>Straight-Line Movement</th>
+                        <th>Static Obstacles</th>
+                        <th>Dynamic Obstacles</th>
+                        <th>Obstacle Clearance</th>
+                        <th>Dynamic Obstacle Handling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NavFn + DWB</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>Good</td>
+                        <td>Moderate responsiveness</td>
+                    </tr>
+                    <tr>
+                        <td>NavFn + MPPI</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>Excellent</td>
+                        <td>Highly responsive</td>
+                    </tr>
+                    <tr>
+                        <td>NavFn + RPP</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>Average (struggles in gaps)</td>
+                        <td>Slow</td>
+                    </tr>
+                    <tr>
+                        <td>Theta* + RPP</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>Excellent</td>
+                        <td>Slow</td>
+                    </tr>
+                    <tr>
+                        <td>Smac Planner Hybrid + MPPI</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>Bad</td>
+                        <td>Moderate responsiveness</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <div class="note">
+                <strong>Key:</strong>
+                <ul>
+                    <li><strong>✔️:</strong> Suitable</li>
+                    <li><strong>❌:</strong> Not Suitable</li>
+                    <li><strong>Obstacle Clearance:</strong> Describes the ability to navigate close proximities without collisions (e.g., Excellent, Good, Bad).</li>
+                    <li><strong>Dynamic Obstacle Handling:</strong> Describes the responsiveness to moving obstacles (e.g., Highly responsive, Moderate, Slow).</li>
+                </ul>
+            </div>
+        
+            <div class="important">
+                <strong>Important:</strong>
+                <p>Controllers perform differently based on drive types (e.g., differential, Ackermann), impacting navigation results. Proper pairing and tuning are crucial for optimal performance.</p>
+            </div>
+        
+            <div class="note">
+                <strong>Note:</strong>
+                <p>Different drives may give varying results.</p>
+            </div>
+        
+            <h3>Planner Suitability for Different Robot Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Planner Name</th>
+                        <th>Circular Differential</th>
+                        <th>Circular Omnidirectional</th>
+                        <th>Non-Circular Ackermann</th>
+                        <th>Non-Circular Legged</th>
+                        <th>Non-Circular Differential/Omnidirectional</th>
+                        <th>Arbitrary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NavFn Planner</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>Smac Planner 2D</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>Theta* Planner</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>Smac Hybrid-A* Planner</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>Smac Lattice Planner</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <div class="note">
+                <strong>Key:</strong>
+                <ul>
+                    <li><strong>✔️:</strong> Suitable for this type of robot.</li>
+                    <li><strong>❌:</strong> Not suitable for this type of robot.</li>
+                </ul>
+            </div>
+        
+            <h3>Controller Suitability for Different Robot Types and Tasks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Controller Name</th>
+                        <th>Differential</th>
+                        <th>Omnidirectional</th>
+                        <th>Ackermann</th>
+                        <th>Legged</th>
+                        <th>Primary Task</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DWB Controller</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>Dynamic obstacle avoidance</td>
+                    </tr>
+                    <tr>
+                        <td>MPPI Controller</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>Dynamic obstacle avoidance</td>
+                    </tr>
+                    <tr>
+                        <td>RPP Controller</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>Exact path following</td>
+                    </tr>
+                    <tr>
+                        <td>Rotation Shim</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>Rotate to rough heading</td>
+                    </tr>
+                    <tr>
+                        <td>VP Controller</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>High-speed path tracking</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <div class="note">
+                <strong>Key:</strong>
+                <ul>
+                    <li><strong>✔️:</strong> Suitable for this type of robot.</li>
+                    <li><strong>❌:</strong> Not suitable for this type of robot.</li>
+                </ul>
         </div>
     </div>
  </body>
