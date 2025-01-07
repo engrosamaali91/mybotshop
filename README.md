@@ -938,3 +938,8 @@ This table provides a clear summary of which planner is best suited for each typ
 ---
 
 This table offers a clear summary of controller suitability based on robot type and primary tasks, helping users make informed decisions about their controller configuration.
+
+
+### Conclusion 
+
+Selecting appropriate planners and controllers is critical for robotic navigation as they must align with the specific task and operational environment. The efficiency of these components varies across different scenarios, such as static and dynamic obstacle navigation, where factors like computational demand, safety, and precision play vital roles. Moreover, tuning parameters in the navigation stack is essential to optimize performance and adaptability. It is, therefore, crucial to comply with safety protocols, especially in environments like retail stores, to ensure safe and efficient human-robot interactions while adhering to regulatory standards and minimizing potential risks.
