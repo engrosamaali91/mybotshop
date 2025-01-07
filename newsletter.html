@@ -6,7 +6,7 @@
   <title>
     Digital Twin-Driven Safety Protocol Development for HRI in German Retail Stores
   </title>
-  <style>
+  <style>7
     body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
@@ -69,6 +69,7 @@
     img {
         max-width: 100%;
         height: auto;
+        margin-bottom: 20px;
     }
   </style>
  </head>
@@ -116,7 +117,7 @@
             </div>
             <p  style="text-align: center;">
                 <a href="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" target="_blank">
-                    <em>[Figure 1: NOVA Carter Robot navigating a warehouse environment.]</em>
+                    <em>NOVA Carter Robot navigating a warehouse environment</em>
                 </a>
             </p>
             <p>In our observations, we tested the <strong>Nova Carter robot</strong>, as shown in the image above, for navigation in a small warehouse environment using Isaac Sim. The robot, equipped with 2D and 3D LiDAR, fisheye, and depth cameras, was tasked to navigate static and dynamic obstacles.</p>
@@ -148,9 +149,10 @@
             </ul>
             <p>These nodes can be visualized in the Isaac Sim viewport for better debugging. However, the overhead in adapting and troubleshooting these nodes can be time-consuming.</p>
             <img src="https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png" alt="Isaac Sim Nodes">
-            <p>
+    
+            <p  style="text-align: center;">
                 <a href="https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png" target="_blank">
-                    Source: Isaac Sim Nodes
+                    <em>Isaac Sim Nodes</em>
                 </a>
             </p>
             <h3>Recommendations</h3>
@@ -352,7 +354,9 @@
             <h3>YOLOv11 Performance Comparison</h3>
             <p>The chart below illustrates how YOLOv11 outperforms earlier models like YOLOv8 in terms of speed and accuracy. YOLOv11 introduces significant improvements, making it the preferred choice for real-time applications such as privacy-focused object detection and blurring.</p>
             <img src="https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png" alt="YOLOv11 Performance Comparison">
-            <p><em>Source: <a href="https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png">Image Reference</a></em></p>
+            <p style="text-align: center;">
+                <em><a href="https://raw.githubusercontent.com/ultralytics/assets/refs/heads/main/yolo/performance-comparison.png">Comparision of ultralytics yolo models</a></em>
+            </p>
 
             <h4>Key Observations:</h4>
             <ul>
@@ -422,10 +426,15 @@
                     </tr>
                 </tbody>
             </table>
-            <p>For more details, refer to the <a href="https://docs.ultralytics.com/models/yolov8/">YOLOv8 documentation</a>.</p>
+
+            <p>
+                For more details, refer to the <a href="https://docs.ultralytics.com/models/yolov8/">YOLOv8 documentation</a>.
+            </p>
             <p>Additionally, the comparison image below illustrates YOLOv8’s performance metrics relative to previous versions, highlighting its superior speed and accuracy.</p>
             <img src="https://github.com/ultralytics/docs/releases/download/0/yolov8-comparison-plots.avif" alt="YOLOv8 Comparison">
-            <p><em>Source: <a href="https://docs.ultralytics.com/models/yolov8/">YOLOv8 Documentation</a></em></p>
+            <p style="text-align: center;">
+                <em><a href="https://docs.ultralytics.com/models/yolov8/">YOLOv8 comparision with earlier yolo models</a></em>
+            </p>
 
             <h3>Why I Chose ZED 2i</h3>
             <p>The <strong>ZED 2i</strong> camera was an ideal choice for this task due to its built-in <strong>body tracking feature</strong>. In dynamic environments like retail stores, where humans are continuously moving, it is critical to track human bodies effectively. The ZED 2i’s advanced capabilities, such as tracking 18 key points of the human body, enable precise and reliable tracking.</p>
@@ -442,7 +451,7 @@
             <div style="text-align: center;">
                 <img src="https://docs.stereolabs.com/isaac-sim/images/ZED_in_isaac_sim.jpg" alt="zed2i in isaac sim">
             </div>
-            <p><em>Image Source: <a href="https://www.stereolabs.com/docs/isaac-sim">ZED2i Documentation</a></em></p>
+            <p style="text-align: center;"><em><a href="https://www.stereolabs.com/docs/isaac-sim">ZED2i Documentation for ROS2</a></em></p>
 
 
 
