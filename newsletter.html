@@ -111,8 +111,10 @@
             </ul>
 
             <h3>Real-World Test: Navigation in a Warehouse Environment</h3>
-            <img src="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" alt="NOVA Carter Robot">
-            <p>
+            <div  style="text-align: center;">
+                <img src="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" alt="NOVA Carter Robot">
+            </div>
+            <p  style="text-align: center;">
                 <a href="https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/main/resources/isaac_ros_docs/robots/nova_carter/nova_carter_diagram_front_left.png" target="_blank">
                     <em>[Figure 1: NOVA Carter Robot navigating a warehouse environment.]</em>
                 </a>
@@ -121,11 +123,16 @@
 
             <h4>Static Obstacle Navigation (Scene 1):</h4>
             <p>The image below depicts Isaac Sim and RViz2 side-by-side, with the robot planning a path around a static object in the warehouse. While the high-definition scene enhances realism, the robot experiences noticeable lag due to the computational demand of the graphics.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/carter_navigation.webp" alt="Scene 1: Navigation around static obstacles">
+            
+            <div  style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/carter_navigation.webp" alt="Scene 1: Navigation around static obstacles">
+            </div>
 
             <h4>Dynamic Obstacle Detection (Scene 2):</h4>
             <p>For dynamic obstacles, such as a person walking through the environment, the simulation struggled to update the map in real-time. By the time the person was detected and the map updated in RViz2, the person had already moved forward, leaving outdated occupancy marks. This delay compromises the reliability of real-time obstacle detection, an issue tied to the simulation and less likely to occur in real-world scenarios.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/carter_with_human.webp" alt="Scene 2: Dynamic obstacle detection">
+            <div  style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/carter_with_human.webp" alt="Scene 2: Dynamic obstacle detection">
+            </div>
 
             <h3>Tradeoff: Graphics vs. Speed</h3>
             <p>Isaac Sim’s high graphics quality comes at the cost of simulation speed, as shown in the image above. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like <strong>Gazebo</strong>, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.</p>
@@ -161,7 +168,9 @@
 
             <h4>Example: Custom Robot in a Custom Environment</h4>
             <p>Take a look at the <strong>custom robot in a custom Gazebo Classic environment</strong>.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/gazebo_env.webp" alt="Gazebo classic environment with custom robot">
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/gazebo_env.webp" alt="Gazebo classic environment with custom robot">
+            </div>
             <p>In this example, the robot operates within a slightly modified environment, featuring walls surrounding the right side of the compound. Such modifications are effortless thanks to the built-in graphical interface.</p>
 
             <h4>Advantages of Gazebo Classic:</h4>
@@ -191,7 +200,9 @@
 
             <h4>Example: A Custom Four-Wheel Robot in Gazebo Fortress</h4>
             <p>Take a look at the <strong>GIF below</strong>, showcasing <strong>a custom four-wheel robot designed in Gazebo Fortress</strong>. The robot demonstrates how Fortress’s enhanced features allow for more detailed and accurate simulations of navigation and other robotic functions.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/fortress_robot.webp" alt="Gazebo Fortress Custom Robot Design">
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/fortress_robot.webp" alt="Gazebo Fortress Custom Robot Design">
+            </div>
 
             <h4>Observations on Gazebo Fortress Environment</h4>
             <p>The <strong>Gazebo Fortress environment</strong> supports advanced features such as better collision detection and handling of dynamic obstacles. This makes it a suitable choice for testing algorithms in environments requiring higher fidelity than Gazebo Classic while maintaining a manageable computational load compared to Isaac Sim.</p>
@@ -425,7 +436,10 @@
             <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/bodytracking.webp" alt="Keypoints Detection GIF">
             <p>The GIF illustrates how the ZED 2i camera accurately tracks and detects human movements by identifying body keypoints, ensuring seamless performance in dynamic environments like retail stores.</p>
             <p>Another compelling reason for experimenting with the ZED 2i camera is its <strong>availability within Isaac Sim</strong>. NVIDIA Isaac Sim supports the ZED 2i camera as a virtual sensor, allowing developers to test and validate robotics applications in high-fidelity simulated environments before deploying them in real-world scenarios.</p>
-            <img src="https://docs.stereolabs.com/isaac-sim/images/ZED_in_isaac_sim.jpg" alt="zed2i in isaac sim">
+            
+            <div style="text-align: center;">
+                <img src="https://docs.stereolabs.com/isaac-sim/images/ZED_in_isaac_sim.jpg" alt="zed2i in isaac sim">
+            </div>
             <p><em>Image Source: <a href="https://www.stereolabs.com/docs/isaac-sim">ZED2i Documentation</a></em></p>
 
 
@@ -617,7 +631,10 @@
                         <li>The robot adhered closely to the planned trajectory with minimal drift.</li>
                         <li>Smooth motion was achieved by tuning parameters such as <code>max_velocity</code> and <code>yaw_goal_tolerance</code>.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_1/straightline.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_1/straightline.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+
+                    </div>
                     <div class="note">
                         <strong>Note:</strong> The scene is speed-forwarded and does not reflect true speed (i.e., 0.26 m/s).
                     </div>
@@ -629,7 +646,10 @@
                         <li>Trajectory adjustments were made by the robot, and it remained on the global path.</li>
                         <li>Minor path deviations were corrected by the local controller.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_1/aroundstatic.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_1/aroundstatic.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+
+                    </div>
                 </li>
                 <li>
                     <strong>Dynamic Obstacles</strong><br>
@@ -638,7 +658,9 @@
                         <li>The robot did not collide with the moving cube.</li>
                         <li>The robot did not maintain a safe distance, likely due to suboptimal tuning of parameters such as <code>inflation_radius</code>, <code>PathDist.scale</code>, or <code>obstacle_max_range</code> in the local and global costmaps.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_1/DynamicObstacles.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_1/DynamicObstacles.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
             </ol>
 
@@ -766,7 +788,9 @@
                         <li>The robot followed a smooth and precise trajectory with minimal drift.</li>
                         <li>Real-time trajectory optimization ensured stable motion.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_2/straightline.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_2/straightline.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
                 <li>
                     <strong>Navigating Static Obstacles</strong><br>
@@ -774,7 +798,9 @@
                         <li>The controller successfully adjusted the robot's path to avoid obstacles, maintaining smooth transitions.</li>
                         <li>Dynamic trajectory optimization minimized unnecessary deviations.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_2/static.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_2/static.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
                 <li>
                     <strong>Navigating Dynamic Obstacles</strong><br>
@@ -783,7 +809,9 @@
                         <li>The robot maintained a safe distance from the moving object.</li>
                         <li>Optimized control commands reduced delays in avoiding faster-moving objects.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_2/dynamic.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_2/dynamic.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
             </ol>
 
@@ -904,7 +932,9 @@
                         <li>The robot navigated smoothly and efficiently, adhering to the global path without significant deviations.</li>
                         <li>Velocity regulation ensured stable and precise motion.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/straight.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/straight.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
                 <li>
                     <strong>Navigating Static Obstacles</strong><br>
@@ -912,7 +942,9 @@
                         <li>Performance was suboptimal, particularly when passing through close gaps.</li>
                         <li>The robot struggled with efficiency compared to other combinations like NavFn + DWB and NavFn + MPPI.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/static2.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/static2.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
                 <li>
                     <strong>Navigating Dynamic Obstacles</strong><br>
@@ -920,7 +952,9 @@
                         <li>The robot managed to replan and avoid moving obstacles, but the response time was slower than other controllers.</li>
                         <li>While it successfully reached the goal pose, the delay in path adjustments indicated limited efficiency in dynamic scenarios.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/Dynamic.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/Dynamic.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
             </ol>
         
@@ -959,7 +993,10 @@
         
             <h5>Interconnected Nodes in Nav2 Stack</h5>
             <p>To better understand the communication between various components of the Nav2 stack, here’s the <strong>RQT Graph</strong> visualization of interconnected nodes. This includes key nodes like the <strong>local cost map</strong>, <strong>global cost map</strong>, <strong>controller server</strong>, <strong>planner server</strong>, and <strong>behavior server</strong>.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/rosgraph.webp" alt="RQT Graph Visualization" style="width:100%; max-width:600px;">
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_3/rosgraph.webp" alt="RQT Graph Visualization" style="width:100%; max-width:600px;">
+
+            </div>
         
             <div class="note">
                 <strong>Note:</strong> The RQT graph illustrates how these components interact to ensure smooth and efficient navigation. Each node plays a critical role:
@@ -982,12 +1019,16 @@
 
             <h6>Straight-Line Movement</h6>
             <p>In a straightforward scenario, the robot moved along a straight line as expected when the path was unobstructed. This behavior highlights the efficiency of the Theta* planner in generating direct, any-angle paths, reducing unnecessary turns, and optimizing the travel distance.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_4/straight.webp" alt="Straight-Line Movement" style="width:100%; max-width:600px;">
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_4/straight.webp" alt="Straight-Line Movement" style="width:100%; max-width:600px;">
+            </div>
 
             <h6>Static Environment</h6>
             <p>When multiple waypoints were provided, the robot recalculated the path dynamically instead of strictly following the given waypoints. It took a shortcut, reaching the goal faster than if it had adhered to the exact waypoints.</p>
             <p><strong>Reason:</strong> The Theta* planner is designed to optimize for the shortest and most efficient path between the start and goal. Waypoints, unless enforced as strict constraints, are treated as optional guides. The recalculated shortcut reflects the planner’s inherent focus on path optimization and reduced traversal time.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_4/static.webp" alt="Static Environment Shortcut" style="width:100%; max-width:600px;">
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_4/static.webp" alt="Static Environment Shortcut" style="width:100%; max-width:600px;">
+            </div>
 
             <h6>Dynamic Environment</h6>
             <p>In a dynamic setup, a walking person primitive was introduced as a moving obstacle:</p>
@@ -995,7 +1036,9 @@
                 <li><strong>First Trial:</strong> The robot collided with the moving person, likely due to limitations in the <strong>RPP local planner</strong> as observed in conjunction with the Navfn planner, which did not react quickly enough to the dynamic change.</li>
                 <li><strong>Second Trial:</strong> After the person moved aside, the robot successfully stopped, recalculated a shorter path, and reached the goal.</li>
             </ul>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_4/dynamic.webp" alt="Dynamic Successful Trial 2" style="width:100%; max-width:600px;">
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_4/dynamic.webp" alt="Dynamic Successful Trial 2" style="width:100%; max-width:600px;">
+            </div>
             <p><strong>Reason:</strong> This outcome underscores the adaptability of Theta* + RPP (Reactive Path Planning). The planner dynamically recalculated the path based on real-time updates, showcasing its ability to handle dynamic obstacles effectively. The successful adjustment in the second trial highlights the importance of robust integration between the global and local planning layers.</p>
 
             <h5>Performance Summary</h5>
@@ -1044,7 +1087,9 @@
                         <li>The robot performed satisfactorily, following a smooth and direct path.</li>
                         <li>No significant deviations or delays were observed.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_5/Straight.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_5/Straight.webp" alt="Straight-Line Movement GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
                 <li>
                     <strong>Navigating Static Obstacles</strong><br>
@@ -1053,7 +1098,9 @@
                         <li>As the robot approached the goal, it took additional time to stabilize.</li>
                         <li>The robot struggled slightly when passing through narrow gaps between walls, experiencing delays due to repeated replanning.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_5/Static.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_5/Static.webp" alt="Static Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
                 <li>
                     <strong>Navigating Dynamic Obstacles</strong><br>
@@ -1062,7 +1109,9 @@
                         <li>Multiple replanning attempts were necessary to successfully navigate around the obstacle.</li>
                         <li>Despite these challenges, the robot ultimately reached the goal.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_5/Dynamic.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    <div style="text-align: center;">
+                        <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/comb_5/Dynamic.webp" alt="Dynamic Obstacles GIF" style="width:100%; max-width:600px;">
+                    </div>
                 </li>
             </ol>
         
