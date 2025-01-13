@@ -93,14 +93,33 @@
 
             <h2>Comparison of Simulation Environments</h2>
             <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/SE.webp" alt="Simulation Environments">
-            <p>Testing autonomous robots in simulation environments is essential to evaluate their performance under both expected and unexpected conditions. This raises an important question: <strong>Which simulation environment is best for testing diverse scenarios?</strong></p>
-            <p>To answer this, let’s compare three prominent simulation platforms: <strong>Gazebo Classic</strong>, <strong>Gazebo Fortress</strong>, and <strong>NVIDIA Isaac Sim</strong> (developed by Omniverse). Each platform has unique strengths and limitations, as highlighted in the <strong>comparison chart above</strong>.</p>
+            <p>Testing autonomous robots in simulation environments is essential to evaluate their performance under both expected and unexpected conditions. This raises an important question:
+            
+            <p><strong>Which simulation environment is best for testing diverse scenarios?</strong></p>
+            
+            
+            <h3>Gazebo Classic: Simplicity and Speed</h3>
             <ul>
-                <li><strong>Gazebo Classic</strong> offers ease of environment setup and a fast simulation speed but lacks support for high-definition simulations and crowd animation. It is a reliable choice for basic ROS2 integration without requiring high-end hardware.</li>
-                <li><strong>Gazebo Fortress</strong> improves on crowd animation and introduces high-definition simulation capabilities. However, it is more resource-intensive and less user-friendly in terms of built-in plugins.</li>
-                <li><strong>NVIDIA Isaac Sim</strong> stands out for its high-fidelity simulation and reinforcement learning support, making it ideal for advanced robotics applications. However, it demands high processing power and has a steeper learning curve for ROS2 integration.</li>
+                <li>Offers ease of environment setup and a fast simulation speed.</li>
+                <li>Lacks support for high-definition simulations and crowd animation.</li>
+                <li>Reliable choice for basic ROS2 integration without requiring high-end hardware.</li>
             </ul>
-            <p>As illustrated in the <strong>image above</strong>, Gazebo Classic excels in simplicity, while NVIDIA Isaac Sim leads in advanced simulation capabilities. Choosing the right platform depends on your project's specific requirements, such as simulation fidelity or hardware limitations.</p>
+
+            <h3>Gazebo Fortress: Enhanced Features</h3>
+            <ul>
+                <li>Improves on crowd animation and introduces high-definition simulation capabilities.</li>
+                <li>More resource-intensive and less user-friendly in terms of built-in plugins.</li>
+                <li>Supports advanced dynamic object handling, useful for complex navigation scenarios.</li>
+            </ul>
+
+            <h3>NVIDIA Isaac Sim: Advanced Capabilities</h3>
+            <ul>
+                <li>Provides high-fidelity simulation and reinforcement learning support.</li>
+                <li>Ideal for advanced robotics applications requiring realistic environments.</li>
+                <li>Demands high processing power and has a steeper learning curve for ROS2 integration.</li>
+            </ul>
+
+            <p>As illustrated in the <strong>comparison chart above</strong>, Gazebo Classic excels in simplicity, while NVIDIA Isaac Sim leads in advanced simulation capabilities. Choosing the right platform depends on your project's specific requirements, such as simulation fidelity or hardware limitations.</p>
 
             <h3>Observations on NVIDIA Isaac Sim for Simulation</h3>
             <p>NVIDIA Isaac Sim is a cutting-edge simulation platform that serves dual purposes: simulation testing and reinforcement learning. In Omni Isaac Gym, robots can be trained effectively for complex tasks. However, while Isaac Sim offers many advantages, as highlighted in the comparison table, it may not always be the best solution for simulations as a test bench.</p>
@@ -147,14 +166,22 @@
             <p>Isaac Sim’s high graphics quality comes at the cost of simulation speed, as shown in the image above. This tradeoff poses challenges when trying to create a digital twin of a realistic environment for algorithm testing. A digital twin must ensure safety protocols and accurate real-time processing. When the simulation platform itself becomes a bottleneck, it may be prudent to switch to alternatives like <strong>Gazebo</strong>, which can provide simpler scenes but better support for real-time algorithm testing without compromising safety.</p>
 
             <h3>Challenges with Isaac Sim for Custom Robots</h3>
-            <p>Another critical challenge is adapting Isaac Sim nodes for custom robots and environments. For instance, configuring TF for custom robots often leads to issues with Isaac Sim’s built-in nodes failing to recognize parent-child relationships, causing delinked transforms. For example, the image below shows proper links with parent and child frames.</p>
-            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/TFs.webp" alt="Transforms">
-            <p>Isaac Sim provides several ROS2 nodes for handling TF transforms and odometry, such as:</p>
+            <p>Isaac Sim offers advanced features but also presents challenges when adapting it for custom robots and environments:</p>
             <ul>
-                <li><strong>TF Publisher</strong> for sensors and full articulation trees.</li>
-                <li><strong>Raw TF Publisher</strong> for individual transforms.</li>
-                <li><strong>Odometry Publisher</strong> for robot movement tracking.</li>
+                <li><strong>Transform Configuration:</strong> Issues with built-in nodes failing to recognize parent-child relationships, leading to delinked transforms.</li>
+                <li><strong>Processing Overhead:</strong> High computational requirements for high-fidelity simulations can slow down real-time testing.</li>
+                <li><strong>Debugging Complexity:</strong> Adapting and troubleshooting nodes like <em>TF Publisher</em> and <em>Odometry Publisher</em> can be time-consuming.</li>
             </ul>
+
+            <p>The image below shows proper links with parent and child frames, as configured in Isaac Sim:</p>
+            <img src="https://raw.githubusercontent.com/MYBOTSHOP/media/refs/heads/main/thesis/dw/nl/TFs.webp" alt="Transforms">
+            <p>Despite these challenges, Isaac Sim provides several ROS2 nodes, such as:</p>
+            <ul>
+                <li><strong>TF Publisher:</strong> Handles sensors and full articulation trees.</li>
+                <li><strong>Raw TF Publisher:</strong> Publishes individual transforms.</li>
+                <li><strong>Odometry Publisher:</strong> Tracks robot movement.</li>
+            </ul>
+            
             <p>These nodes can be visualized in the Isaac Sim viewport for better debugging. However, the overhead in adapting and troubleshooting these nodes can be time-consuming.</p>
             <img src="https://docs.omniverse.nvidia.com/isaacsim/latest/_images/isaac_tutorial_ros2_odometry_graph_final.png" alt="Isaac Sim Nodes">
     
@@ -226,9 +253,7 @@
 
             <h4>Recommendation:</h4>
             <p>Gazebo Fortress is ideal for those seeking a balance between performance, graphics, and usability. It is particularly well-suited for developers migrating from Gazebo Classic or those looking for advanced features without the heavy computational requirements of Isaac Sim.</p>
-        
-        
-        
+    
             
             <h2>Incorporating Safety Protocols into Digital Twin Environments</h2>
             <p>To ensure robust and safe human-robot interactions (HRI) in dynamic retail environments, several safety protocols have been identified and integrated into digital twin simulations. These protocols are designed to address potential hazards, ensure compliance with regulatory standards, and improve the reliability of robots operating in close proximity to humans.</p>
@@ -475,9 +500,9 @@
                     
             </ul>    
                 These insights and tools lay a strong foundation for creating robust object detection systems, especially in settings where robots need to navigate and interact with complex environments efficiently.</li>
-            <p>
-                In Part 1, we explored foundational technologies for safety and compliance in retail robotics. In Part 2, we dive deeper into experimental findings with planners and controllers. Stay tuned!
-            </p>
+            <p>In Part 1, we explored foundational technologies for safety and compliance in retail robotics. This included comparisons of simulation environments and the integration of advanced tools like the ZED 2i camera and Ultralytics YOLO models.</p>
+            <p>In Part 2, we will dive deeper into experimental findings, focusing on the performance of different planners and controllers in real-world scenarios. Don’t miss it!</p>
+                
     </div>
  </body>
 
